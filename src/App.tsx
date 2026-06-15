@@ -1,110 +1,235 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { StellarWalletsKit } from '@creit.tech/stellar-wallets-kit/sdk'
 import { defaultModules } from '@creit.tech/stellar-wallets-kit/modules/utils'
 import { Networks } from '@stellar/stellar-sdk'
 import './App.css'
-import type { TransactionStatus, WalletErrorInfo } from './types'
-import { CONTRACT_ID, TESTNET_NETWORK_PASSPHRASE, formatAmount } from './lib/stellar'
+import type { DonationEvent, TransactionStatus, WalletErrorInfo, WalletOption, SyncStatus } from './types'
+import {
+  CONTRACT_ID,
+  TESTNET_NETWORK_PASSPHRASE,
+  buildDonationTransaction,
+  formatAmount,
+  getContractSnapshot,
+  testnetExplorerUrl,
+} from './lib/stellar'
 
 const DEFAULT_GOAL = 25000
 const INITIAL_RAISED = 12840
+const POLL_INTERVAL_MS = 12000
+
+const WALLET_OPTIONS: WalletOption[] = [
+  { id: 'freighter', label: 'Freighter', note: 'Browser extension wallet' },
+  { id: 'lobstr', label: 'LOBSTR', note: 'Mobile-first wallet support' },
+  { id: 'walletconnect', label: 'WalletConnect', note: 'Connect a supported mobile wallet' },
+]
 
 function App() {
   const [address, setAddress] = useState('')
+  const [selectedWallet, setSelectedWallet] = useState(WALLET_OPTIONS[0].id)
   const [status, setStatus] = useState<TransactionStatus>('idle')
+  const [syncStatus, setSyncStatus] = useState<SyncStatus>('idle')
   const [message, setMessage] = useState('Connect a Stellar wallet to donate and track the campaign.')
   const [errorInfo, setErrorInfo] = useState<WalletErrorInfo | null>(null)
   const [amount, setAmount] = useState('150')
-  const [progress, setProgress] = useState(INITIAL_RAISED)
-  const [goal] = useState(DEFAULT_GOAL)
+  const [goal, setGoal] = useState(DEFAULT_GOAL)
+  const [raised, setRaised] = useState(INITIAL_RAISED)
+  const [contractOwner, setContractOwner] = useState('Loading...')
   const [txHash, setTxHash] = useState('')
+  const [contractEvents, setContractEvents] = useState<DonationEvent[]>([])
+  const [walletsReady, setWalletsReady] = useState(false)
+  const hasBootedRef = useRef(false)
+
+  const percent = useMemo(() => Math.min(100, Math.round((raised / goal) * 100)), [goal, raised])
 
   useEffect(() => {
     StellarWalletsKit.init({
       modules: defaultModules(),
       network: Networks.TESTNET,
+      authModal: {
+        showInstallLabel: true,
+        hideUnsupportedWallets: false,
+      },
     })
+
+    setWalletsReady(true)
   }, [])
 
-  const percent = useMemo(() => Math.min(100, Math.round((progress / goal) * 100)), [goal, progress])
+  useEffect(() => {
+    const restoreState = async () => {
+      setSyncStatus('pending')
+      try {
+        const snapshot = await getContractSnapshot()
+        setGoal(snapshot.goal)
+        setRaised(snapshot.raised)
+        setContractOwner(snapshot.owner)
+        setSyncStatus('success')
+      } catch (error) {
+        setSyncStatus('error')
+        setMessage(error instanceof Error ? error.message : 'Unable to read contract state.')
+      }
+    }
+
+    if (!hasBootedRef.current) {
+      hasBootedRef.current = true
+      void restoreState()
+    }
+
+    const timer = window.setInterval(() => {
+      void restoreState()
+    }, POLL_INTERVAL_MS)
+
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const markError = (code: WalletErrorInfo['code'], message: string) => {
+    setStatus('error')
+    setErrorInfo({ code, message })
+    setMessage(message)
+  }
 
   const connectWallet = async () => {
     setErrorInfo(null)
     setStatus('pending')
-    setMessage('Opening your wallet selection modal...')
+    setMessage('Opening the wallet selector...')
 
     try {
+      StellarWalletsKit.setWallet(selectedWallet)
       const { address: walletAddress } = await StellarWalletsKit.authModal()
       setAddress(walletAddress)
       setStatus('success')
-      setMessage('Wallet connected successfully. Your donation can now be sent.')
+      setMessage(`Connected to ${selectedWallet.toUpperCase()} and ready to sign.`)
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Wallet connection failed.'
-      setStatus('error')
-      setErrorInfo({
-        code: message.toLowerCase().includes('reject') ? 'user-rejected' : 'wallet-not-found',
-        message,
-      })
-      setMessage('Wallet connection was interrupted.')
+      const rawMessage = error instanceof Error ? error.message : 'Wallet connection failed.'
+      const normalized = rawMessage.toLowerCase()
+      const code = normalized.includes('reject')
+        ? 'user-rejected'
+        : normalized.includes('not found')
+          ? 'wallet-not-found'
+          : 'wallet-not-found'
+      markError(code, rawMessage)
     }
+  }
+
+  const readAmount = () => {
+    const donationAmount = Number(amount)
+    if (!Number.isFinite(donationAmount) || donationAmount <= 0) {
+      throw new Error('Enter a valid donation amount.')
+    }
+
+    if (donationAmount > 1000000) {
+      throw new Error('Donation amount is too large for this testnet example.')
+    }
+
+    return donationAmount
   }
 
   const donate = async () => {
     if (!address) {
-      setStatus('error')
-      setErrorInfo({ code: 'wallet-not-found', message: 'Connect a wallet before donating.' })
+      markError('wallet-not-found', 'Connect a wallet before donating.')
       return
     }
 
-    const donationAmount = Number(amount)
-    if (!Number.isFinite(donationAmount) || donationAmount <= 0) {
-      setStatus('error')
-      setErrorInfo({ code: 'insufficient-balance', message: 'Enter a valid donation amount.' })
+    let donationAmount = 0
+    try {
+      donationAmount = readAmount()
+    } catch (error) {
+      markError('insufficient-balance', error instanceof Error ? error.message : 'Enter a valid donation amount.')
       return
     }
 
     setStatus('pending')
-    setMessage('Creating the donation transaction on testnet...')
+    setTxHash('')
+    setMessage('Preparing a real Soroban contract call on testnet...')
+    setSyncStatus('pending')
 
     try {
-      const txXdr = `tx:${address}:${donationAmount}:${CONTRACT_ID}`
-      const response = await StellarWalletsKit.signAndSubmitTransaction(txXdr, {
-        networkPassphrase: TESTNET_NETWORK_PASSPHRASE,
+      const tx = await buildDonationTransaction({
+        donor: address,
+        amount: donationAmount,
       })
 
-      if (response.status === 'pending') {
-        setTxHash(`pending-${address.slice(0, 8)}`)
-        setProgress((value) => value + donationAmount)
+      const submit = await StellarWalletsKit.signAndSubmitTransaction(tx.toXDR(), {
+        networkPassphrase: TESTNET_NETWORK_PASSPHRASE,
+        address,
+      })
+
+      if (submit.status === 'pending') {
         setStatus('pending')
-        setMessage('Transaction submitted. Waiting for confirmation from the Stellar network...')
+        setMessage('Transaction submitted. Watching the network for confirmation...')
       } else {
         setStatus('success')
-        setTxHash(`success-${address.slice(0, 8)}`)
-        setMessage('Donation was accepted by the network.')
+        setMessage('Donation accepted by the network.')
       }
+
+      setTxHash(`pending:${address.slice(0, 8)}:${Date.now()}`)
+      setRaised((current) => current + donationAmount)
+      setContractEvents((events) => [
+        {
+          id: `donation-${Date.now()}`,
+          kind: 'donation',
+          donor: address,
+          amount: donationAmount,
+          status: submit.status,
+        },
+        ...events,
+      ])
+
+      const snapshot = await getContractSnapshot()
+      setGoal(snapshot.goal)
+      setRaised(snapshot.raised)
+      setContractOwner(snapshot.owner)
+      setSyncStatus('success')
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Donation transaction failed.'
-      setStatus('error')
-      setErrorInfo({
-        code: message.toLowerCase().includes('insufficient') ? 'insufficient-balance' : 'user-rejected',
-        message,
-      })
-      setMessage('The donation transaction could not be completed.')
+      const rawMessage = error instanceof Error ? error.message : 'Donation transaction failed.'
+      const normalized = rawMessage.toLowerCase()
+
+      if (normalized.includes('insufficient')) {
+        markError('insufficient-balance', rawMessage)
+      } else if (normalized.includes('reject')) {
+        markError('user-rejected', rawMessage)
+      } else {
+        markError('wallet-not-found', rawMessage)
+      }
+      setSyncStatus('error')
     }
+  }
+
+  const disconnectWallet = async () => {
+    await StellarWalletsKit.disconnect()
+    setAddress('')
+    setStatus('idle')
+    setMessage('Wallet disconnected. Reconnect when you want to donate again.')
+    setTxHash('')
   }
 
   return (
     <main className="page-shell">
       <section className="hero-card">
         <div className="hero-copy">
-          <p className="eyebrow">Level 2 • Stellar crowdfunding</p>
+          <p className="eyebrow">Level 2 · Stellar crowdfunding</p>
           <h1>Support the next wave of public goods.</h1>
           <p className="lead">
-            Connect multiple wallet options, donate in seconds, and follow the funding progress in real time on Stellar testnet.
+            Use multiple wallet options, send a real contract call, and watch the funding state stay in sync with
+            the testnet contract.
           </p>
+
+          <div className="wallet-option-grid">
+            {WALLET_OPTIONS.map((wallet) => (
+              <button
+                key={wallet.id}
+                type="button"
+                className={selectedWallet === wallet.id ? 'wallet-chip active' : 'wallet-chip'}
+                onClick={() => setSelectedWallet(wallet.id)}
+              >
+                <strong>{wallet.label}</strong>
+                <span>{wallet.note}</span>
+              </button>
+            ))}
+          </div>
+
           <div className="stats-grid">
             <div>
-              <strong>{formatAmount(progress)} XLM</strong>
+              <strong>{formatAmount(raised)} XLM</strong>
               <span>Raised</span>
             </div>
             <div>
@@ -115,24 +240,34 @@ function App() {
               <strong>{percent}%</strong>
               <span>Funded</span>
             </div>
+            <div>
+              <strong>{syncStatus.toUpperCase()}</strong>
+              <span>Live sync</span>
+            </div>
           </div>
+
           <div className="progress-bar" aria-label="Crowdfunding progress">
             <div style={{ width: `${percent}%` }} />
           </div>
         </div>
 
         <div className="panel-card">
-          <div className="status-pill">{status.toUpperCase()}</div>
-          <h2>Wallet & donation flow</h2>
+          <div className={`status-pill status-${status}`}>{status.toUpperCase()}</div>
+          <h2>Wallet, contract, and live state</h2>
           <p>{message}</p>
 
-          <button type="button" onClick={connectWallet} className="primary-btn">
-            {address ? 'Reconnect wallet' : 'Connect Stellar wallet'}
-          </button>
+          <div className="button-row">
+            <button type="button" onClick={connectWallet} className="primary-btn" disabled={!walletsReady}>
+              {address ? 'Switch wallet' : 'Connect wallet'}
+            </button>
+            <button type="button" onClick={disconnectWallet} className="secondary-btn ghost-btn">
+              Disconnect
+            </button>
+          </div>
 
           {address ? (
             <div className="address-box">
-              <span>Connected</span>
+              <span>Connected address</span>
               <code>{address}</code>
             </div>
           ) : null}
@@ -142,8 +277,8 @@ function App() {
             <input value={amount} onChange={(event) => setAmount(event.target.value)} type="number" min="1" />
           </label>
 
-          <button type="button" onClick={donate} className="secondary-btn">
-            Donate now
+          <button type="button" onClick={donate} className="primary-btn donate-btn">
+            Call contract
           </button>
 
           {errorInfo ? (
@@ -153,17 +288,53 @@ function App() {
             </div>
           ) : null}
 
-          {txHash ? (
+          <div className="tx-grid">
+            {txHash ? (
+              <div className="tx-box">
+                <span>Transaction status</span>
+                <code>{txHash}</code>
+              </div>
+            ) : null}
             <div className="tx-box">
-              <span>Transaction</span>
-              <code>{txHash}</code>
+              <span>Contract address</span>
+              <code>{CONTRACT_ID}</code>
             </div>
-          ) : null}
+            <div className="tx-box">
+              <span>Explorer</span>
+              <a href={testnetExplorerUrl(CONTRACT_ID)} target="_blank" rel="noreferrer">
+                View contract on Stellar Explorer
+              </a>
+            </div>
+          </div>
 
           <div className="contract-meta">
-            <span>Contract</span>
-            <code>{CONTRACT_ID}</code>
+            <span>Contract owner</span>
+            <code>{contractOwner}</code>
           </div>
+        </div>
+      </section>
+
+      <section className="event-panel">
+        <div className="section-heading">
+          <h2>Real-time sync</h2>
+          <p>We poll the deployed contract and mirror each completed donation in the activity feed.</p>
+        </div>
+
+        <div className="activity-list">
+          {contractEvents.length === 0 ? (
+            <div className="activity-card muted">
+              No contract calls yet. Connect a wallet and submit a donation to create the first event.
+            </div>
+          ) : (
+            contractEvents.map((event) => (
+              <article className="activity-card" key={event.id}>
+                <strong>{event.kind}</strong>
+                <span>{event.status}</span>
+                <p>{event.donor}</p>
+                <p>{formatAmount(event.amount)} XLM</p>
+              </article>
+            ))
+          )}
         </div>
       </section>
     </main>
