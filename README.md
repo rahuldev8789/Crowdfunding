@@ -32,6 +32,12 @@ A React + TypeScript Stellar crowdfunding app with multi-wallet connection, a de
    npm run build
    ```
 
+## Project Links
+
+- Repository: https://github.com/rahuldev8789/Crowdfunding
+- Live demo: https://your-deployment-url.example
+- Contract explorer: https://stellar.expert/explorer/testnet/contract/CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX
+
 ## Contract details
 
 - Contract ID: `CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX`
@@ -47,6 +53,32 @@ A React + TypeScript Stellar crowdfunding app with multi-wallet connection, a de
 - Wallet options visible in the UI
 - Deployed contract address listed above
 - Transaction hash of a contract call shown in the app after a donation is submitted
+
+## Proof Items
+
+- Live demo: `https://your-deployment-url.example`
+- Wallet options screenshot: add an image of the wallet selector area here
+- Contract call hash: paste the transaction hash shown after a donation is submitted
+
+## Screenshot
+
+Add a screenshot of the wallet selector area here before submission.
+
+## Final Submission Checklist
+
+- Public GitHub repository
+- README with setup instructions
+- 2+ meaningful commits
+- Wallet options visible in the app
+- Deployed contract address listed above
+- Transaction hash from a real contract call
+- Live demo link if you choose to include one
+
+## Suggested Submission Notes
+
+- The app uses Stellar Wallets Kit for multi-wallet connection.
+- The frontend reads live contract state from the deployed Soroban contract on testnet.
+- Donation actions create real contract calls from the UI and surface transaction status in the app.
 
 ## Contract verification
 
