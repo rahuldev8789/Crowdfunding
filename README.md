@@ -62,7 +62,7 @@ A React + TypeScript Stellar crowdfunding app with multi-wallet connection, a de
 
 ## Screenshot
 
-Add a screenshot of the wallet selector area here before submission.
+![Wallet options screenshot](./public/wallet-options.png)
 
 ## Final Submission Checklist
 
