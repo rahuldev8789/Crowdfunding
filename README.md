@@ -70,6 +70,21 @@ Runs 4 Vitest unit tests validating currency formatting, Explorer URL structurin
 
 ---
 
+## 📸 Verification Screenshots & Proofs
+
+### 1. Mobile Responsive UI
+![Mobile Responsive UI](./public/wallet-options.png)
+*(Displays responsive glassmorphic layout and multi-wallet selection chips)*
+
+### 2. CI/CD Pipeline Running
+![CI/CD Pipeline Running](https://github.com/rahuldev8789/Crowdfunding/actions/workflows/ci.yml/badge.svg)
+*(GitHub Actions automated workflow verifying build and test suites upon every commit)*
+
+### 3. Test Output (8+ Passing Tests)
+See the exact terminal log blocks under the **Comprehensive Automated Testing** section above confirming **4 passing Soroban contract tests** and **4 passing Vitest frontend unit tests**.
+
+---
+
 ## 🛠️ Local Setup Instructions
 
 1. **Clone & Install Dependencies**
