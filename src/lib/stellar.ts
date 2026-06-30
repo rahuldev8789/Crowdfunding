@@ -56,3 +56,8 @@ export const buildDonationTransaction = async ({
   const simulation = await rpcServer.simulateTransaction(tx)
   return rpc.assembleTransaction(tx, simulation).build()
 }
+
+export const submitSignedTransaction = async (signedTxXdr: string) => {
+  const transaction = TransactionBuilder.fromXDR(signedTxXdr, TESTNET_NETWORK_PASSPHRASE)
+  return rpcServer.sendTransaction(transaction)
+}

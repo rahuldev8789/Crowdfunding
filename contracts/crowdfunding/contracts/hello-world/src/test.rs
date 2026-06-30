@@ -14,6 +14,7 @@ fn test_initialize() {
     assert_eq!(client.get_goal(), 50000);
     assert_eq!(client.get_raised(), 0);
     assert_eq!(client.get_owner(), String::from_str(&env, "creator_alice"));
+    assert_eq!(client.is_funded(), false);
 }
 
 #[test]
@@ -27,6 +28,7 @@ fn test_donate_updates_progress() {
 
     assert_eq!(raised, 150);
     assert_eq!(client.get_raised(), 150);
+    assert_eq!(client.get_donor_contribution(&String::from_str(&env, "alice")), 150);
 }
 
 #[test]
@@ -46,6 +48,7 @@ fn test_multiple_donations() {
     let raised3 = client.donate(&String::from_str(&env, "donor_3"), &300);
     assert_eq!(raised3, 2050);
     assert_eq!(client.get_raised(), 2050);
+    assert_eq!(client.get_donor_contribution(&String::from_str(&env, "donor_2")), 1250);
 }
 
 #[test]
@@ -57,4 +60,19 @@ fn test_getters_default() {
     assert_eq!(client.get_goal(), 0);
     assert_eq!(client.get_raised(), 0);
     assert_eq!(client.get_owner(), String::from_str(&env, ""));
+    assert_eq!(client.is_funded(), false);
+}
+
+#[test]
+fn test_marks_funded_at_goal() {
+    let env = Env::default();
+    let contract_id = env.register(Contract, ());
+    let client = ContractClient::new(&env, &contract_id);
+
+    client.initialize(&String::from_str(&env, "creator"), &1000);
+    client.donate(&String::from_str(&env, "alice"), &700);
+    assert_eq!(client.is_funded(), false);
+    client.donate(&String::from_str(&env, "bob"), &300);
+    assert_eq!(client.get_raised(), 1000);
+    assert_eq!(client.is_funded(), true);
 }

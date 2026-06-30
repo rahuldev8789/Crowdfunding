@@ -10,6 +10,7 @@ import {
   buildDonationTransaction,
   formatAmount,
   getContractSnapshot,
+  submitSignedTransaction,
   testnetExplorerUrl,
 } from './lib/stellar'
 
@@ -94,7 +95,7 @@ function App() {
 
     try {
       StellarWalletsKit.setWallet(selectedWallet)
-      const { address: walletAddress } = await StellarWalletsKit.authModal()
+      const { address: walletAddress } = await StellarWalletsKit.fetchAddress()
       setAddress(walletAddress)
       setStatus('success')
       setMessage(`Connected to ${selectedWallet.toUpperCase()} and ready to sign.`)
@@ -148,20 +149,22 @@ function App() {
         amount: donationAmount,
       })
 
-      const submit = await StellarWalletsKit.signAndSubmitTransaction(tx.toXDR(), {
+      const { signedTxXdr } = await StellarWalletsKit.signTransaction(tx.toXDR(), {
         networkPassphrase: TESTNET_NETWORK_PASSPHRASE,
         address,
       })
 
-      if (submit.status === 'pending') {
-        setStatus('pending')
-        setMessage('Transaction submitted. Watching the network for confirmation...')
-      } else {
-        setStatus('success')
-        setMessage('Donation accepted by the network.')
-      }
+      const submit = await submitSignedTransaction(signedTxXdr)
+      setStatus(submit.status === 'ERROR' ? 'error' : submit.status === 'PENDING' ? 'pending' : 'success')
+      setMessage(
+        submit.status === 'PENDING'
+          ? 'Transaction signed and submitted. Watching the network for confirmation...'
+          : submit.status === 'ERROR'
+            ? 'The network rejected the submitted transaction.'
+            : 'Donation accepted by the network.',
+      )
 
-      setTxHash(`pending:${address.slice(0, 8)}:${Date.now()}`)
+      setTxHash(submit.hash ?? `pending:${address.slice(0, 8)}:${Date.now()}`)
       setRaised((current) => current + donationAmount)
       setContractEvents((events) => [
         {
@@ -169,7 +172,7 @@ function App() {
           kind: 'donation',
           donor: address,
           amount: donationAmount,
-          status: submit.status,
+          status: submit.status === 'ERROR' ? 'error' : submit.status === 'PENDING' ? 'pending' : 'success',
         },
         ...events,
       ])

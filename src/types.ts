@@ -19,5 +19,5 @@ export interface DonationEvent {
   kind: 'donation'
   donor: string
   amount: number
-  status: 'success' | 'pending'
+  status: 'success' | 'pending' | 'error'
 }

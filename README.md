@@ -2,7 +2,7 @@
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://crowdfunding-mu-peach.vercel.app/) [![CI Pipeline](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen?logo=github-actions)](https://github.com/rahuldev8789/Crowdfunding/actions) **[Live Demo URL](https://crowdfunding-mu-peach.vercel.app/)**
 
-A complete, production-ready React + TypeScript + Soroban smart contract dApp built on Stellar Testnet. Features advanced smart contract state synchronization, inter-contract architecture patterns, real-time event streaming, multi-wallet connection, automated CI/CD pipelines, and robust dual-layer unit testing.
+A complete, production-ready React + TypeScript + Soroban smart contract dApp built on Stellar Testnet. Features goal validation, donor contribution tracking, funded-state persistence, real-time event streaming, multi-wallet connection, automated CI/CD pipelines, and robust dual-layer unit testing.
 
 ---
 
@@ -15,7 +15,7 @@ A complete, production-ready React + TypeScript + Soroban smart contract dApp bu
 ## 🌟 Level 3 Production Features
 
 ### 1. Advanced Smart Contract & Architecture
-- **Persistent State Tracking:** Stores goal, accumulated funds raised, and contract ownership securely in Soroban persistent ledger storage.
+- **Crowdfunding State Tracking:** Stores goal, accumulated funds raised, contract ownership, funded status, and per-donor contribution totals securely in Soroban persistent ledger storage.
 - **Inter-Contract & Vault Interaction Pattern:** Designed with modular data structures capable of cross-contract verification and token vault transfers.
 - **Real-Time Event Streaming:** Emits structured Soroban events (`("donation", "received")`) upon every successful donation transaction, enabling immediate frontend state polling and UI updates without page reloads.
 
@@ -35,15 +35,16 @@ A complete, production-ready React + TypeScript + Soroban smart contract dApp bu
 Our dual-layer testing architecture validates both smart contract execution integrity and frontend utility computation.
 
 ### Rust Soroban Contract Tests (`cargo test`)
-Runs 4 unit tests verifying storage initialization, mathematical balance accumulation, multiple donor indexing, and getter queries:
+Runs 5 unit tests verifying storage initialization, mathematical balance accumulation, multiple donor indexing, goal completion, and getter queries:
 ```text
-running 4 tests
+running 5 tests
 test test::test_getters_default ... ok
 test test::test_multiple_donations ... ok
 test test::test_initialize ... ok
 test test::test_donate_updates_progress ... ok
+test test::test_marks_funded_at_goal ... ok
 
-test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
 ```
 
 ### Frontend Utility Tests (`npm run test`)
