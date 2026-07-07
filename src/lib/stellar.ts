@@ -10,6 +10,7 @@ export const TESTNET_EXPLORER_BASE = 'https://stellar.expert/explorer/testnet/co
 const rpcServer = new rpc.Server(RPC_URL, { allowHttp: false })
 
 const fundTestnetAccount = async (accountId: string) => {
+  console.debug('[stellar] funding testnet account via Friendbot', accountId)
   const response = await fetch(`${FRIENDBOT_URL}?addr=${encodeURIComponent(accountId)}`)
   if (!response.ok) {
     throw new Error(`Testnet funding failed with status ${response.status}.`)
@@ -46,11 +47,13 @@ export const buildDonationTransaction = async ({
 }) => {
   let account
   try {
+    console.debug('[stellar] loading testnet account', donor)
     account = await rpcServer.getAccount(donor)
   } catch (error) {
     const message = error instanceof Error ? error.message.toLowerCase() : ''
     if (message.includes('not found')) {
       await fundTestnetAccount(donor)
+      console.debug('[stellar] retrying testnet account load after funding', donor)
       account = await rpcServer.getAccount(donor)
     } else {
       throw error
@@ -73,10 +76,12 @@ export const buildDonationTransaction = async ({
     .build()
 
   const simulation = await rpcServer.simulateTransaction(tx)
+  console.debug('[stellar] transaction simulated', simulation)
   return rpc.assembleTransaction(tx, simulation).build()
 }
 
 export const submitSignedTransaction = async (signedTxXdr: string) => {
   const transaction = TransactionBuilder.fromXDR(signedTxXdr, TESTNET_NETWORK_PASSPHRASE)
+  console.debug('[stellar] submitting signed transaction', transaction.toXDR())
   return rpcServer.sendTransaction(transaction)
 }

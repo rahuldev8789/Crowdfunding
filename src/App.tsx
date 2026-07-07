@@ -38,6 +38,7 @@ function App() {
   const [contractEvents, setContractEvents] = useState<DonationEvent[]>([])
   const [walletsReady, setWalletsReady] = useState(false)
   const [availableWalletIds, setAvailableWalletIds] = useState<string[]>([])
+  const [debugSteps, setDebugSteps] = useState<string[]>(['App booted'])
   const hasBootedRef = useRef(false)
 
   const percent = useMemo(() => Math.min(100, Math.round((raised / goal) * 100)), [goal, raised])
@@ -94,6 +95,11 @@ function App() {
     setMessage(message)
   }
 
+  const pushDebugStep = (step: string) => {
+    setDebugSteps((current) => [step, ...current].slice(0, 6))
+    console.debug(`[ui] ${step}`)
+  }
+
   const buildWalletError = (rawMessage: string) => {
     const normalized = rawMessage.toLowerCase()
 
@@ -123,12 +129,14 @@ function App() {
     setErrorInfo(null)
     setStatus('pending')
     setMessage('Opening the wallet selector...')
+    pushDebugStep(`Connecting with ${selectedWallet.toUpperCase()}`)
 
     if (!isWalletAvailable(selectedWallet)) {
       markError(
         'wallet-not-found',
         `The selected ${selectedWallet.toUpperCase()} wallet is not available in this browser. Try Freighter or LOBSTR.`,
       )
+      pushDebugStep(`Wallet unavailable: ${selectedWallet.toUpperCase()}`)
       return
     }
 
@@ -138,10 +146,12 @@ function App() {
       setAddress(walletAddress)
       setStatus('success')
       setMessage(`Connected to ${selectedWallet.toUpperCase()} and ready to sign.`)
+      pushDebugStep(`Wallet connected: ${walletAddress.slice(0, 8)}...`)
     } catch (error) {
       const rawMessage = error instanceof Error ? error.message : 'Wallet connection failed.'
       const walletError = buildWalletError(rawMessage)
       markError(walletError.code, walletError.message)
+      pushDebugStep(`Wallet connection failed: ${rawMessage}`)
     }
   }
 
@@ -161,6 +171,7 @@ function App() {
   const donate = async () => {
     if (!address) {
       markError('wallet-not-found', 'Connect a wallet before donating.')
+      pushDebugStep('Donation blocked: no connected wallet')
       return
     }
 
@@ -169,6 +180,7 @@ function App() {
       donationAmount = readAmount()
     } catch (error) {
       markError('insufficient-balance', error instanceof Error ? error.message : 'Enter a valid donation amount.')
+      pushDebugStep('Donation blocked: invalid amount')
       return
     }
 
@@ -176,18 +188,22 @@ function App() {
     setTxHash('')
     setMessage('Preparing a real Soroban contract call on testnet...')
     setSyncStatus('pending')
+    pushDebugStep(`Preparing donation for ${donationAmount} XLM`)
 
     try {
+      pushDebugStep('Building donation transaction')
       const tx = await buildDonationTransaction({
         donor: address,
         amount: donationAmount,
       })
 
+      pushDebugStep('Signing donation transaction')
       const { signedTxXdr } = await StellarWalletsKit.signTransaction(tx.toXDR(), {
         networkPassphrase: TESTNET_NETWORK_PASSPHRASE,
         address,
       })
 
+      pushDebugStep('Submitting signed transaction')
       const submit = await submitSignedTransaction(signedTxXdr)
       setStatus(submit.status === 'ERROR' ? 'error' : submit.status === 'PENDING' ? 'pending' : 'success')
       setMessage(
@@ -216,6 +232,7 @@ function App() {
       setRaised(snapshot.raised)
       setContractOwner(snapshot.owner)
       setSyncStatus('success')
+      pushDebugStep('Donation flow completed')
     } catch (error) {
       const rawMessage = error instanceof Error ? error.message : 'Donation transaction failed.'
       const normalized = rawMessage.toLowerCase()
@@ -228,6 +245,7 @@ function App() {
         markError('wallet-unavailable', rawMessage)
       }
       setSyncStatus('error')
+      pushDebugStep(`Donation failed: ${rawMessage}`)
     }
   }
 
@@ -350,6 +368,15 @@ function App() {
           <div className="contract-meta">
             <span>Contract owner</span>
             <code>{contractOwner}</code>
+          </div>
+
+          <div className="debug-box">
+            <span>Debug trail</span>
+            <ul>
+              {debugSteps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

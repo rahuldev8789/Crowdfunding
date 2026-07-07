@@ -237,6 +237,28 @@ a {
   gap: 6px;
 }
 
+.debug-box {
+  background: rgba(10, 17, 30, 0.88);
+  border: 1px solid rgba(103, 232, 249, 0.2);
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+.debug-box span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  color: #93c5fd;
+}
+
+.debug-box ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #dbeafe;
+  display: grid;
+  gap: 6px;
+}
+
 .address-box span,
 .tx-box span,
 .contract-meta span {
