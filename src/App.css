@@ -109,6 +109,12 @@ a {
   transform: translateY(-1px);
 }
 
+.wallet-chip:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

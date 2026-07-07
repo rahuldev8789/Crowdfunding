@@ -21,7 +21,6 @@ const POLL_INTERVAL_MS = 12000
 const WALLET_OPTIONS: WalletOption[] = [
   { id: 'freighter', label: 'Freighter', note: 'Browser extension wallet' },
   { id: 'lobstr', label: 'LOBSTR', note: 'Mobile-first wallet support' },
-  { id: 'walletconnect', label: 'WalletConnect', note: 'Connect a supported mobile wallet' },
 ]
 
 function App() {
@@ -38,6 +37,7 @@ function App() {
   const [txHash, setTxHash] = useState('')
   const [contractEvents, setContractEvents] = useState<DonationEvent[]>([])
   const [walletsReady, setWalletsReady] = useState(false)
+  const [availableWalletIds, setAvailableWalletIds] = useState<string[]>([])
   const hasBootedRef = useRef(false)
 
   const percent = useMemo(() => Math.min(100, Math.round((raised / goal) * 100)), [goal, raised])
@@ -52,7 +52,13 @@ function App() {
       },
     })
 
-    setWalletsReady(true)
+    void StellarWalletsKit.refreshSupportedWallets()
+      .then((wallets) => {
+        setAvailableWalletIds(wallets.filter((wallet) => wallet.isAvailable).map((wallet) => wallet.id))
+      })
+      .finally(() => {
+        setWalletsReady(true)
+      })
   }, [])
 
   useEffect(() => {
@@ -111,10 +117,20 @@ function App() {
     }
   }
 
+  const isWalletAvailable = (walletId: string) => availableWalletIds.length === 0 || availableWalletIds.includes(walletId)
+
   const connectWallet = async () => {
     setErrorInfo(null)
     setStatus('pending')
     setMessage('Opening the wallet selector...')
+
+    if (!isWalletAvailable(selectedWallet)) {
+      markError(
+        'wallet-not-found',
+        `The selected ${selectedWallet.toUpperCase()} wallet is not available in this browser. Try Freighter or LOBSTR.`,
+      )
+      return
+    }
 
     try {
       StellarWalletsKit.setWallet(selectedWallet)
@@ -239,8 +255,11 @@ function App() {
               <button
                 key={wallet.id}
                 type="button"
-                className={selectedWallet === wallet.id ? 'wallet-chip active' : 'wallet-chip'}
+                className={`${selectedWallet === wallet.id ? 'wallet-chip active' : 'wallet-chip'}${
+                  !isWalletAvailable(wallet.id) ? ' disabled' : ''
+                }`}
                 onClick={() => setSelectedWallet(wallet.id)}
+                disabled={!isWalletAvailable(wallet.id)}
               >
                 <strong>{wallet.label}</strong>
                 <span>{wallet.note}</span>
