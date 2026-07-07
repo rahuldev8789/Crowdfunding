@@ -274,6 +274,38 @@ a {
   font-size: 0.88rem;
 }
 
+.fresh-key-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.mini-btn {
+  border: 1px solid rgba(103, 232, 249, 0.28);
+  background: rgba(34, 211, 238, 0.12);
+  color: #dbeafe;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mini-btn:hover {
+  transform: translateY(-1px);
+}
+
+.fresh-note {
+  color: #93c5fd;
+}
+
+.fresh-copy-status {
+  color: #86efac;
+  font-size: 0.82rem;
+}
+
 code {
   word-break: break-all;
   font-size: 0.78rem;

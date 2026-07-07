@@ -41,6 +41,7 @@ function App() {
   const [availableWalletIds, setAvailableWalletIds] = useState<string[]>([])
   const [debugSteps, setDebugSteps] = useState<string[]>(['App booted'])
   const [freshAccount, setFreshAccount] = useState<{ publicKey: string; secretKey: string } | null>(null)
+  const [copyState, setCopyState] = useState<'idle' | 'public' | 'secret'>('idle')
   const hasBootedRef = useRef(false)
 
   const percent = useMemo(() => Math.min(100, Math.round((raised / goal) * 100)), [goal, raised])
@@ -287,6 +288,17 @@ function App() {
     }
   }
 
+  const copyFreshKey = async (value: string, kind: 'public' | 'secret') => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopyState(kind)
+      pushDebugStep(`Copied fresh ${kind} key`)
+    } catch {
+      setCopyState('idle')
+      pushDebugStep(`Copy failed for fresh ${kind} key`)
+    }
+  }
+
   return (
     <main className="page-shell">
       <section className="hero-card">
@@ -406,9 +418,23 @@ function App() {
           {freshAccount ? (
             <div className="fresh-account-box">
               <span>Fresh testnet account</span>
-              <p>Import this secret key into Freighter if you want to sign transactions from the new account.</p>
-              <code>Public key: {freshAccount.publicKey}</code>
-              <code>Secret key: {freshAccount.secretKey}</code>
+              <p>Copy the key you need. Import the secret key into Freighter if you want to sign from the fresh account.</p>
+              <div className="fresh-key-row">
+                <code>Public key: {freshAccount.publicKey}</code>
+                <button type="button" className="mini-btn" onClick={() => void copyFreshKey(freshAccount.publicKey, 'public')}>
+                  Copy public
+                </button>
+              </div>
+              <div className="fresh-key-row">
+                <code>Secret key: {freshAccount.secretKey}</code>
+                <button type="button" className="mini-btn" onClick={() => void copyFreshKey(freshAccount.secretKey, 'secret')}>
+                  Copy secret
+                </button>
+              </div>
+              <p className="fresh-note">
+                Next step: open Freighter, import the secret key, switch to that account, then press <strong>Connect wallet</strong>.
+              </p>
+              {copyState !== 'idle' ? <p className="fresh-copy-status">Copied {copyState} key to clipboard.</p> : null}
             </div>
           ) : null}
 
