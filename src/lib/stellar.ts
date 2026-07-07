@@ -2,11 +2,19 @@ import { Networks, Operation, TransactionBuilder, rpc, scValToNative, nativeToSc
 
 export const TESTNET_NETWORK_PASSPHRASE = Networks.TESTNET
 export const HORIZON_URL = 'https://horizon-testnet.stellar.org'
+export const FRIENDBOT_URL = 'https://friendbot.stellar.org'
 export const RPC_URL = 'https://soroban-testnet.stellar.org'
 export const CONTRACT_ID = 'CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX'
 export const TESTNET_EXPLORER_BASE = 'https://stellar.expert/explorer/testnet/contract'
 
 const rpcServer = new rpc.Server(RPC_URL, { allowHttp: false })
+
+const fundTestnetAccount = async (accountId: string) => {
+  const response = await fetch(`${FRIENDBOT_URL}?addr=${encodeURIComponent(accountId)}`)
+  if (!response.ok) {
+    throw new Error(`Testnet funding failed with status ${response.status}.`)
+  }
+}
 
 export const formatAmount = (value: number | string) => {
   const amount = typeof value === 'string' ? Number(value) : value
@@ -36,7 +44,18 @@ export const buildDonationTransaction = async ({
   donor: string
   amount: number
 }) => {
-  const account = await rpcServer.getAccount(donor)
+  let account
+  try {
+    account = await rpcServer.getAccount(donor)
+  } catch (error) {
+    const message = error instanceof Error ? error.message.toLowerCase() : ''
+    if (message.includes('not found')) {
+      await fundTestnetAccount(donor)
+      account = await rpcServer.getAccount(donor)
+    } else {
+      throw error
+    }
+  }
   const fee = '100'
 
   const tx = new TransactionBuilder(account, {
