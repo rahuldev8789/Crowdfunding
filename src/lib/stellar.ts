@@ -69,13 +69,19 @@ export const buildDonationTransaction = async ({
       Operation.invokeContractFunction({
         contract: CONTRACT_ID,
         function: 'donate',
-        args: [nativeToScVal(donor, { type: 'string' }), nativeToScVal(BigInt(Math.round(amount)), { type: 'u64' })],
+        args: [nativeToScVal(donor, { type: 'string' }), nativeToScVal(BigInt(Math.round(amount)), { type: 'i128' })],
       }),
     )
     .setTimeout(300)
     .build()
 
-  const simulation = await rpcServer.simulateTransaction(tx)
+  let simulation
+  try {
+    simulation = await rpcServer.simulateTransaction(tx)
+  } catch (error) {
+    console.debug('[stellar] transaction simulation failed', error)
+    throw error
+  }
   console.debug('[stellar] transaction simulated', simulation)
   return rpc.assembleTransaction(tx, simulation).build()
 }
