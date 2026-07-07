@@ -7,6 +7,7 @@ import type { DonationEvent, TransactionStatus, WalletErrorInfo, WalletOption, S
 import {
   CONTRACT_ID,
   TESTNET_NETWORK_PASSPHRASE,
+  createFreshTestnetAccount,
   buildDonationTransaction,
   formatAmount,
   getContractSnapshot,
@@ -39,6 +40,7 @@ function App() {
   const [walletsReady, setWalletsReady] = useState(false)
   const [availableWalletIds, setAvailableWalletIds] = useState<string[]>([])
   const [debugSteps, setDebugSteps] = useState<string[]>(['App booted'])
+  const [freshAccount, setFreshAccount] = useState<{ publicKey: string; secretKey: string } | null>(null)
   const hasBootedRef = useRef(false)
 
   const percent = useMemo(() => Math.min(100, Math.round((raised / goal) * 100)), [goal, raised])
@@ -266,6 +268,25 @@ function App() {
     setTxHash('')
   }
 
+  const createFreshAccount = async () => {
+    setStatus('pending')
+    setMessage('Creating and funding a fresh testnet account...')
+    setErrorInfo(null)
+    pushDebugStep('Creating fresh testnet account')
+
+    try {
+      const account = await createFreshTestnetAccount()
+      setFreshAccount(account)
+      setMessage('Fresh testnet account created and funded. Import the secret key into Freighter to sign with it.')
+      setStatus('success')
+      pushDebugStep(`Fresh account funded: ${account.publicKey.slice(0, 8)}...`)
+    } catch (error) {
+      const rawMessage = error instanceof Error ? error.message : 'Fresh testnet account creation failed.'
+      markError('wallet-unavailable', rawMessage)
+      pushDebugStep(`Fresh account failed: ${rawMessage}`)
+    }
+  }
+
   return (
     <main className="page-shell">
       <section className="hero-card">
@@ -327,6 +348,9 @@ function App() {
             <button type="button" onClick={connectWallet} className="primary-btn" disabled={!walletsReady}>
               {address ? 'Switch wallet' : 'Connect wallet'}
             </button>
+            <button type="button" onClick={createFreshAccount} className="secondary-btn">
+              Fresh testnet account
+            </button>
             <button type="button" onClick={disconnectWallet} className="secondary-btn ghost-btn">
               Disconnect
             </button>
@@ -378,6 +402,15 @@ function App() {
             <span>Contract owner</span>
             <code>{contractOwner}</code>
           </div>
+
+          {freshAccount ? (
+            <div className="fresh-account-box">
+              <span>Fresh testnet account</span>
+              <p>Import this secret key into Freighter if you want to sign transactions from the new account.</p>
+              <code>Public key: {freshAccount.publicKey}</code>
+              <code>Secret key: {freshAccount.secretKey}</code>
+            </div>
+          ) : null}
 
           <div className="debug-box">
             <span>Debug trail</span>

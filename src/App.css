@@ -228,7 +228,8 @@ a {
 
 .address-box,
 .tx-box,
-.contract-meta {
+.contract-meta,
+.fresh-account-box {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 12px 14px;
@@ -261,9 +262,16 @@ a {
 
 .address-box span,
 .tx-box span,
-.contract-meta span {
+.contract-meta span,
+.fresh-account-box span {
   font-size: 0.82rem;
   color: #93c5fd;
+}
+
+.fresh-account-box p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 0.88rem;
 }
 
 code {

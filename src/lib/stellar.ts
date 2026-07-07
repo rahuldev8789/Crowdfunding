@@ -1,4 +1,4 @@
-import { Networks, Operation, TransactionBuilder, rpc, scValToNative, nativeToScVal, xdr } from '@stellar/stellar-sdk'
+import { Keypair, Networks, Operation, TransactionBuilder, rpc, scValToNative, nativeToScVal, xdr } from '@stellar/stellar-sdk'
 
 export const TESTNET_NETWORK_PASSPHRASE = Networks.TESTNET
 export const HORIZON_URL = 'https://horizon-testnet.stellar.org'
@@ -9,12 +9,22 @@ export const TESTNET_EXPLORER_BASE = 'https://stellar.expert/explorer/testnet/co
 
 const rpcServer = new rpc.Server(RPC_URL, { allowHttp: false })
 
-const fundTestnetAccount = async (accountId: string) => {
+export const fundTestnetAccount = async (accountId: string) => {
   console.debug('[stellar] funding testnet account via Friendbot', accountId)
   const response = await fetch(`${FRIENDBOT_URL}?addr=${encodeURIComponent(accountId)}`)
   if (!response.ok) {
     throw new Error(`[friendbot] Testnet funding failed with status ${response.status}.`)
   }
+}
+
+export const createFreshTestnetAccount = async () => {
+  const keypair = Keypair.random()
+  const publicKey = keypair.publicKey()
+  const secretKey = keypair.secret()
+
+  await fundTestnetAccount(publicKey)
+
+  return { publicKey, secretKey }
 }
 
 export const formatAmount = (value: number | string) => {
