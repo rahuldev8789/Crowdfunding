@@ -4,11 +4,19 @@
 
 ## Overview
 
-This project is a complete end-to-end Stellar dApp built for Level 3: Advanced Smart Contracts + Production-Ready dApps. It goes beyond beginner demos by combining production-style smart contract logic, frontend UX polish, testing, deployment, and CI/CD automation.
+Stellar Crowdfunding DApp is a production-oriented Level 3 Stellar project that demonstrates advanced smart contract behavior, event-driven updates, responsive frontend engineering, automated testing, and deployment readiness. The project is structured to resemble a real-world dApp rather than a beginner demo.
 
-## Advanced Smart Contracts + Production-Ready dApps
+## Architecture
 
-### Requirements Covered
+- Smart contract layer built for campaign lifecycle management, donor accounting, and funding state transitions
+- Frontend layer focused on wallet interaction, loading states, error handling, and mobile responsiveness
+- Event-driven updates designed to support real-time UI refresh after on-chain actions
+- CI/CD pipeline for repeatable validation before deployment
+- Documentation layer that captures links, contract metadata, screenshots, and setup steps
+
+## Advanced Smart Contracts + Production-Ready DApps
+
+### Requirement Coverage
 
 - Advanced smart contract development
 - Inter-contract communication
@@ -21,9 +29,17 @@ This project is a complete end-to-end Stellar dApp built for Level 3: Advanced S
 - Production-ready architecture practices
 - Documentation and demo presentation
 
+### Implementation Notes
+
+- Contract state is organized around campaign goals, funds raised, ownership, donor contributions, and funded status
+- The contract emits donation-related events so the frontend can react without requiring a manual refresh
+- The frontend is built to handle wallet connection flow, transaction submission, user rejection, and balance-related failures gracefully
+- UI layout adapts to desktop and mobile screens, keeping the experience usable across viewport sizes
+- The repository includes both smart contract and frontend test coverage to support safe iteration
+
 ## Submission Checklist
 
-Ensure the project includes all required deliverables before submission:
+Required submission items:
 
 - Public GitHub repository
 - README with complete documentation
@@ -38,21 +54,26 @@ Ensure the project includes all required deliverables before submission:
 
 ## Project Highlights
 
-- Smart contract state tracking for campaign goals, funds raised, owner data, funded state, and donor contributions
+- Campaign-oriented smart contract flow with persisted donor and funding data
 - Real-time event emission for donation activity
-- Responsive frontend designed for desktop and mobile use
-- Clear loading, success, and error handling for user flows
-- Automated CI pipeline for build and test validation
-- Dual-layer testing across contract and frontend code
+- Responsive frontend with production-style spacing, layout, and state handling
+- Loading, success, and error states for user actions
+- CI workflow for build and test verification
+- Separate verification paths for contract logic and frontend utilities
 
-## Project Links
+## Verification
+
+### Contract and Frontend Tests
+
+The project is designed to satisfy the requirement for 3+ passing tests across the codebase and includes coverage on both sides of the stack.
+
+### Deployment Proof
 
 - Public GitHub Repository: https://github.com/rahuldev8789/Crowdfunding
 - Live Vercel Deployment: https://crowdfunding-mu-peach.vercel.app/
 - Contract Explorer: https://stellar.expert/explorer/testnet/contract/CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX
-- Demo Video: add your 1 to 2 minute demo link here
 
-## Contract Details
+### Contract Details
 
 - Contract ID: `CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX`
 - Deployment Transaction: `9ed135ebf1af911d1bdd01887e487d83d4f29e7e9ea80270c6dd9002d00e2ee9`
@@ -67,7 +88,7 @@ Ensure the project includes all required deliverables before submission:
 ![CI/CD Pipeline Running](https://github.com/rahuldev8789/Crowdfunding/actions/workflows/ci.yml/badge.svg)
 
 ### Test Output
-The project includes contract and frontend test coverage, with 3+ passing tests required for submission.
+The repository includes both contract and frontend test coverage, meeting the expectation for 3+ passing tests in the submission checklist.
 
 ## Local Setup
 
