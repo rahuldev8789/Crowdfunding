@@ -227,12 +227,21 @@ function App() {
         ...events,
       ])
 
-      const snapshot = await getContractSnapshot()
-      setGoal(snapshot.goal)
-      setRaised(snapshot.raised)
-      setContractOwner(snapshot.owner)
-      setSyncStatus('success')
-      pushDebugStep('Donation flow completed')
+      try {
+        pushDebugStep('Refreshing contract snapshot')
+        const snapshot = await getContractSnapshot()
+        setGoal(snapshot.goal)
+        setRaised(snapshot.raised)
+        setContractOwner(snapshot.owner)
+        setSyncStatus('success')
+        pushDebugStep('Donation flow completed')
+      } catch (snapshotError) {
+        const snapshotMessage =
+          snapshotError instanceof Error ? snapshotError.message : 'Unable to refresh contract state.'
+        setSyncStatus('error')
+        setMessage(snapshotMessage)
+        pushDebugStep(`Snapshot refresh failed: ${snapshotMessage}`)
+      }
     } catch (error) {
       const rawMessage = error instanceof Error ? error.message : 'Donation transaction failed.'
       const normalized = rawMessage.toLowerCase()
