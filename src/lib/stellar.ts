@@ -13,7 +13,7 @@ const fundTestnetAccount = async (accountId: string) => {
   console.debug('[stellar] funding testnet account via Friendbot', accountId)
   const response = await fetch(`${FRIENDBOT_URL}?addr=${encodeURIComponent(accountId)}`)
   if (!response.ok) {
-    throw new Error(`Testnet funding failed with status ${response.status}.`)
+    throw new Error(`[friendbot] Testnet funding failed with status ${response.status}.`)
   }
 }
 
@@ -52,11 +52,21 @@ export const buildDonationTransaction = async ({
   } catch (error) {
     const message = error instanceof Error ? error.message.toLowerCase() : ''
     if (message.includes('not found')) {
-      await fundTestnetAccount(donor)
+      try {
+        await fundTestnetAccount(donor)
+      } catch (fundError) {
+        const fundMessage = fundError instanceof Error ? fundError.message : 'Unknown testnet funding failure.'
+        throw new Error(fundMessage)
+      }
       console.debug('[stellar] retrying testnet account load after funding', donor)
-      account = await rpcServer.getAccount(donor)
+      try {
+        account = await rpcServer.getAccount(donor)
+      } catch (retryError) {
+        const retryMessage = retryError instanceof Error ? retryError.message : 'Unknown account reload failure.'
+        throw new Error(`[horizon:getAccount] ${retryMessage}`)
+      }
     } else {
-      throw error
+      throw new Error(`[horizon:getAccount] ${error instanceof Error ? error.message : 'Unknown account lookup failure.'}`)
     }
   }
   const fee = '100'
@@ -80,14 +90,18 @@ export const buildDonationTransaction = async ({
     simulation = await rpcServer.simulateTransaction(tx)
   } catch (error) {
     console.debug('[stellar] transaction simulation failed', error)
-    throw error
+    throw new Error(`[rpc:simulateTransaction] ${error instanceof Error ? error.message : 'Unknown simulation failure.'}`)
   }
   console.debug('[stellar] transaction simulated', simulation)
   return rpc.assembleTransaction(tx, simulation).build()
 }
 
 export const submitSignedTransaction = async (signedTxXdr: string) => {
-  const transaction = TransactionBuilder.fromXDR(signedTxXdr, TESTNET_NETWORK_PASSPHRASE)
-  console.debug('[stellar] submitting signed transaction', transaction.toXDR())
-  return rpcServer.sendTransaction(transaction)
+  try {
+    const transaction = TransactionBuilder.fromXDR(signedTxXdr, TESTNET_NETWORK_PASSPHRASE)
+    console.debug('[stellar] submitting signed transaction', transaction.toXDR())
+    return await rpcServer.sendTransaction(transaction)
+  } catch (error) {
+    throw new Error(`[rpc:sendTransaction] ${error instanceof Error ? error.message : 'Unknown submission failure.'}`)
+  }
 }
