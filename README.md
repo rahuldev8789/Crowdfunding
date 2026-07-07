@@ -6,6 +6,16 @@
 
 Stellar Crowdfunding DApp is a production-oriented Level 3 Stellar project that demonstrates advanced smart contract behavior, event-driven updates, responsive frontend engineering, automated testing, and deployment readiness. The project is structured to resemble a real-world dApp rather than a beginner demo.
 
+## At A Glance
+
+| Area | What It Shows |
+| --- | --- |
+| Smart Contracts | Campaign lifecycle logic, donor accounting, funding state transitions |
+| Frontend | Wallet flow, loading states, error handling, mobile responsiveness |
+| Real-Time UX | Event-driven updates after on-chain actions |
+| Delivery | Live deployment, contract explorer link, CI badge, screenshots |
+| Validation | Contract and frontend test coverage |
+
 ## Architecture
 
 - Smart contract layer built for campaign lifecycle management, donor accounting, and funding state transitions
@@ -36,6 +46,14 @@ Stellar Crowdfunding DApp is a production-oriented Level 3 Stellar project that 
 - The frontend is built to handle wallet connection flow, transaction submission, user rejection, and balance-related failures gracefully
 - UI layout adapts to desktop and mobile screens, keeping the experience usable across viewport sizes
 - The repository includes both smart contract and frontend test coverage to support safe iteration
+
+### Production Signals
+
+- Public deployment is available through Vercel
+- Contract metadata is exposed through a public testnet explorer
+- CI status is visible from the repository badge
+- Screenshots document responsive UI and pipeline verification
+- The local setup supports repeatable build, lint, and test runs
 
 ## Submission Checklist
 
@@ -118,3 +136,8 @@ The repository includes both contract and frontend test coverage, meeting the ex
    ```bash
    npm run build
    ```
+
+## Notes
+
+- Demo video link intentionally omitted for now
+- The README is organized for submission review and production-style presentation

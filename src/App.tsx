@@ -88,6 +88,29 @@ function App() {
     setMessage(message)
   }
 
+  const buildWalletError = (rawMessage: string) => {
+    const normalized = rawMessage.toLowerCase()
+
+    if (normalized.includes('reject')) {
+      return {
+        code: 'user-rejected' as const,
+        message: 'You rejected the wallet request. Please approve it in your wallet app and try again.',
+      }
+    }
+
+    if (normalized.includes('not found') || normalized.includes('not installed') || normalized.includes('missing')) {
+      return {
+        code: 'wallet-not-found' as const,
+        message: `No available ${selectedWallet.toUpperCase()} wallet was found. Install, unlock, or switch to a supported wallet.`,
+      }
+    }
+
+    return {
+      code: 'wallet-unavailable' as const,
+      message: `The selected ${selectedWallet.toUpperCase()} wallet could not be reached. Open it, unlock it, and retry.`,
+    }
+  }
+
   const connectWallet = async () => {
     setErrorInfo(null)
     setStatus('pending')
@@ -101,13 +124,8 @@ function App() {
       setMessage(`Connected to ${selectedWallet.toUpperCase()} and ready to sign.`)
     } catch (error) {
       const rawMessage = error instanceof Error ? error.message : 'Wallet connection failed.'
-      const normalized = rawMessage.toLowerCase()
-      const code = normalized.includes('reject')
-        ? 'user-rejected'
-        : normalized.includes('not found')
-          ? 'wallet-not-found'
-          : 'wallet-not-found'
-      markError(code, rawMessage)
+      const walletError = buildWalletError(rawMessage)
+      markError(walletError.code, walletError.message)
     }
   }
 
@@ -191,7 +209,7 @@ function App() {
       } else if (normalized.includes('reject')) {
         markError('user-rejected', rawMessage)
       } else {
-        markError('wallet-not-found', rawMessage)
+        markError('wallet-unavailable', rawMessage)
       }
       setSyncStatus('error')
     }
