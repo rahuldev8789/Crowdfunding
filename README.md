@@ -139,5 +139,6 @@ The repository includes both contract and frontend test coverage, meeting the ex
 
 ## Notes
 
-- Demo video link intentionally omitted for now
+- Demo video link should be added before final submission so the checklist is complete
+- Verified locally on `main` with 25 commits and a passing frontend test suite
 - The README is organized for submission review and production-style presentation
