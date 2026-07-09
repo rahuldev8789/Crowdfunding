@@ -8,7 +8,8 @@
 - Demo Video: https://drive.google.com/file/d/1ZTSrL93AISNDjMiIF1L-CjSQ9bmmtSSa/view?usp=sharing
 - Public GitHub Repository: https://github.com/rahuldev8789/Crowdfunding
 - Contract Explorer: https://stellar.expert/explorer/testnet/contract/CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX
-- Set `VITE_REWARD_CONTRACT_ID` in `.env` with your deployed reward contract before donating on testnet.
+- Reward Contract Explorer: https://stellar.expert/explorer/testnet/contract/CAAPAPB4W7DVSIJOXHGCXJ45HFNFUBAFAODWASY7IKLFW3CX6GKJCB3C
+- Set `VITE_REWARD_CONTRACT_ID` in `.env` with the deployed reward contract before donating on testnet.
 
 ## Screenshots
 
@@ -48,6 +49,8 @@
 - Contract ID: `CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX`
 - Deployment Transaction: `9ed135ebf1af911d1bdd01887e487d83d4f29e7e9ea80270c6dd9002d00e2ee9`
 - Contract Creation Transaction: `e348954ecca4cf5299281c7092bfb18a5dc3d05aeb0572d794ae9ef2aba5dd8f`
+- Reward Contract ID: `CAAPAPB4W7DVSIJOXHGCXJ45HFNFUBAFAODWASY7IKLFW3CX6GKJCB3C`
+- Reward Contract Deployment Transaction: `dd699988d411e72d4475717ab27bd889f572328213a83b1afdd8e1a54865e566`
 
 ## Local Setup
 
