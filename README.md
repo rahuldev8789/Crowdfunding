@@ -22,6 +22,17 @@
 - Test output screenshot: complete
 - Demo video link: complete
 
+## Screenshots
+
+### Mobile Responsive UI
+![Mobile Responsive UI](./public/screenshots/mobile-responsive-ui.svg)
+
+### CI/CD Pipeline Running
+![CI/CD Pipeline Running](./public/screenshots/ci-cd-pipeline-running.svg)
+
+### Test Output
+![Test Output](./public/screenshots/test-output.svg)
+
 ## Overview
 
 Stellar Crowdfunding DApp is a production-oriented Level 3 Stellar project that demonstrates advanced smart contract behavior, event-driven updates, responsive frontend engineering, automated testing, and deployment readiness. The project is structured to resemble a real-world dApp rather than a beginner demo.
@@ -117,17 +128,6 @@ The project is designed to satisfy the requirement for 3+ passing tests across t
 - Contract ID: `CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX`
 - Deployment Transaction: `9ed135ebf1af911d1bdd01887e487d83d4f29e7e9ea80270c6dd9002d00e2ee9`
 - Contract Creation Transaction: `e348954ecca4cf5299281c7092bfb18a5dc3d05aeb0572d794ae9ef2aba5dd8f`
-
-## Screenshots
-
-### Mobile Responsive UI
-![Mobile Responsive UI](./public/screenshots/mobile-responsive-ui.svg)
-
-### CI/CD Pipeline Running
-![CI/CD Pipeline Running](./public/screenshots/ci-cd-pipeline-running.svg)
-
-### Test Output
-![Test Output](./public/screenshots/test-output.svg)
 
 ## Local Setup
 
