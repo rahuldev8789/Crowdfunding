@@ -12,10 +12,12 @@
 ## Screenshots
 
 ### Mobile Responsive UI
-![Mobile Responsive UI](./public/screenshots/mobile-responsive-ui.svg)
+<img width="262" height="576" alt="Screenshot 2026-07-10 033433" src="https://github.com/user-attachments/assets/86ed95dc-e18b-42b5-a306-7ec2c6a70e0e" />
+
 
 ### CI/CD Pipeline Running
-![CI/CD Pipeline Running](./public/screenshots/ci-cd-pipeline-running.svg)
+<img width="857" height="250" alt="Screenshot 2026-07-10 033825" src="https://github.com/user-attachments/assets/519b43b3-c199-4722-ba8e-835a31ce0a06" />
+
 
 ### Test Output
 ![Test Output](./public/screenshots/test-output.svg)
