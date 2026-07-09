@@ -9,7 +9,7 @@
 - Public GitHub Repository: https://github.com/rahuldev8789/Crowdfunding
 - Contract Explorer: https://stellar.expert/explorer/testnet/contract/CB6Z2H3NUTBIYY7CUR5PKCF4YROK7SYHVP72GM54FZKJQMQZQZINPXTE
 - Reward Contract Explorer: https://stellar.expert/explorer/testnet/contract/CAAPAPB4W7DVSIJOXHGCXJ45HFNFUBAFAODWASY7IKLFW3CX6GKJCB3C
-- Set `VITE_REWARD_CONTRACT_ID` in `.env` with the deployed reward contract before donating on testnet.
+- `VITE_REWARD_CONTRACT_ID` can override the built-in reward-contract address if you deploy your own testnet copy.
 
 ## Screenshots
 
@@ -33,7 +33,7 @@
 - Contract-side tests for initialize, donate, getters, and funded state
 - Frontend helper tests for formatting and contract URL generation
 - GitHub Actions CI for lint, build, and contract tests
-- Reward-contract calls are wired through `VITE_REWARD_CONTRACT_ID`
+- Reward-contract calls use the deployed testnet reward contract by default and can be overridden with `VITE_REWARD_CONTRACT_ID`
 
 ## Verification
 

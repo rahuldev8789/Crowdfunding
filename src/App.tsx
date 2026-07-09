@@ -17,6 +17,7 @@ import {
 const DEFAULT_GOAL = 25000
 const INITIAL_RAISED = 12840
 const POLL_INTERVAL_MS = 12000
+const DEFAULT_REWARD_CONTRACT_ID = 'CAAPAPB4W7DVSIJOXHGCXJ45HFNFUBAFAODWASY7IKLFW3CX6GKJCB3C'
 
 const WALLET_OPTIONS: WalletOption[] = [
   { id: 'freighter', label: 'Freighter', note: 'Browser extension wallet' },
@@ -24,7 +25,7 @@ const WALLET_OPTIONS: WalletOption[] = [
 ]
 
 function App() {
-  const rewardContractId = import.meta.env.VITE_REWARD_CONTRACT_ID ?? ''
+  const rewardContractId = import.meta.env.VITE_REWARD_CONTRACT_ID ?? DEFAULT_REWARD_CONTRACT_ID
   const [address, setAddress] = useState('')
   const [selectedWallet, setSelectedWallet] = useState(WALLET_OPTIONS[0].id)
   const [status, setStatus] = useState<TransactionStatus>('idle')
@@ -173,12 +174,6 @@ function App() {
     if (!address) {
       markError('wallet-not-found', 'Connect a wallet before donating.')
       pushDebugStep('Donation blocked: no connected wallet')
-      return
-    }
-
-    if (!rewardContractId) {
-      markError('wallet-unavailable', 'Set VITE_REWARD_CONTRACT_ID to enable the reward contract call.')
-      pushDebugStep('Donation blocked: missing reward contract id')
       return
     }
 
