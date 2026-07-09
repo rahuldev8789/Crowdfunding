@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Mobile Responsive UI</title>
+  <desc id="desc">A stylized screenshot of the crowdfunding app in a narrow mobile layout.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#07111f"/>
+      <stop offset="55%" stop-color="#101d36"/>
+      <stop offset="100%" stop-color="#13284a"/>
+    </linearGradient>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111f39" stop-opacity="0.98"/>
+      <stop offset="100%" stop-color="#0b1322" stop-opacity="0.98"/>
+    </linearGradient>
+    <linearGradient id="button" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="170" cy="110" r="220" fill="#22d3ee" opacity="0.12"/>
+  <circle cx="1470" cy="120" r="260" fill="#8b5cf6" opacity="0.12"/>
+  <circle cx="1360" cy="860" r="290" fill="#22d3ee" opacity="0.08"/>
+
+  <text x="80" y="92" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="40" letter-spacing="6">MOBILE RESPONSIVE UI</text>
+  <text x="80" y="135" fill="#7dd3fc" font-family="Inter, Arial, sans-serif" font-size="20">Verified frontend layout on a compact viewport</text>
+
+  <rect x="540" y="90" rx="52" ry="52" width="520" height="820" fill="#0b1322" stroke="#dbeafe" stroke-opacity="0.18" stroke-width="4"/>
+  <rect x="570" y="135" rx="34" ry="34" width="460" height="740" fill="url(#hero)" stroke="#ffffff" stroke-opacity="0.12"/>
+
+  <rect x="602" y="172" rx="18" ry="18" width="156" height="34" fill="#0f2740" stroke="#67e8f9" stroke-opacity="0.35"/>
+  <text x="624" y="195" fill="#7dd3fc" font-family="Inter, Arial, sans-serif" font-size="14" letter-spacing="2">LEVEL 2</text>
+
+  <text x="602" y="262" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Support the next wave</text>
+  <text x="602" y="303" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="22">of public goods.</text>
+  <text x="602" y="346" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="16">Wallet flow, contract calls,</text>
+  <text x="602" y="368" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="16">and live state tracking.</text>
+
+  <rect x="602" y="406" rx="18" ry="18" width="396" height="92" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="624" y="438" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="13">Raised</text>
+  <text x="624" y="470" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">12,840 XLM</text>
+
+  <rect x="602" y="516" rx="18" ry="18" width="396" height="92" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="624" y="548" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="13">Goal</text>
+  <text x="624" y="580" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">25,000 XLM</text>
+
+  <rect x="602" y="626" rx="18" ry="18" width="396" height="12" fill="#ffffff" fill-opacity="0.10"/>
+  <rect x="602" y="626" rx="18" ry="18" width="203" height="12" fill="url(#button)"/>
+
+  <rect x="602" y="660" rx="18" ry="18" width="396" height="58" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.08"/>
+  <text x="624" y="696" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Connect wallet</text>
+
+  <rect x="602" y="736" rx="18" ry="18" width="396" height="58" fill="url(#button)"/>
+  <text x="748" y="772" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Call contract</text>
+
+  <text x="80" y="916" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="18">Responsive layout keeps the app usable on narrow screens without collapsing the action flow.</text>
+</svg>

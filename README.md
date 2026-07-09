@@ -100,13 +100,13 @@ The project is designed to satisfy the requirement for 3+ passing tests across t
 ## Screenshots
 
 ### Mobile Responsive UI
-![Mobile Responsive UI](./public/wallet-options.png)
+![Mobile Responsive UI](./public/screenshots/mobile-responsive-ui.svg)
 
 ### CI/CD Pipeline Running
-![CI/CD Pipeline Running](https://github.com/rahuldev8789/Crowdfunding/actions/workflows/ci.yml/badge.svg)
+![CI/CD Pipeline Running](./public/screenshots/ci-cd-pipeline-running.svg)
 
 ### Test Output
-The repository includes both contract and frontend test coverage, meeting the expectation for 3+ passing tests in the submission checklist.
+![Test Output](./public/screenshots/test-output.svg)
 
 ## Local Setup
 
