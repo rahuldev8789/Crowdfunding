@@ -12,44 +12,31 @@
     </linearGradient>
   </defs>
   <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
   <text x="80" y="92" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="700">CI / CD Pipeline Running</text>
   <text x="80" y="132" fill="#7dd3fc" font-family="Inter, Arial, sans-serif" font-size="18">GitHub Actions workflow captured after a successful push to main</text>
 
-  <rect x="104" y="180" width="1392" height="716" rx="18" fill="#0b1322" stroke="#ffffff" stroke-opacity="0.10"/>
-  <rect x="104" y="180" width="1392" height="48" rx="18" fill="#111827"/>
-  <circle cx="138" cy="204" r="6" fill="#fb7185"/>
-  <circle cx="158" cy="204" r="6" fill="#fbbf24"/>
-  <circle cx="178" cy="204" r="6" fill="#4ade80"/>
-  <text x="214" y="210" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="14">github.com / Actions / CI Pipeline</text>
-  <text x="1428" y="210" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="14" text-anchor="end">workflow run #482</text>
+  <rect x="84" y="140" width="1432" height="780" rx="16" fill="#0f172a" stroke="#ffffff" stroke-opacity="0.10"/>
+  <rect x="84" y="140" width="1432" height="58" rx="16" fill="#111827"/>
+  <text x="120" y="176" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">All checks have passed</text>
+  <text x="120" y="198" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="13">2 successful checks</text>
+  <text x="1460" y="179" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="28" text-anchor="end">×</text>
 
-  <rect x="140" y="250" width="1320" height="76" rx="16" fill="#ffffff" fill-opacity="0.05"/>
-  <circle cx="176" cy="288" r="15" fill="#22c55e"/>
-  <text x="206" y="294" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">CI Pipeline</text>
-  <text x="364" y="294" fill="#86efac" font-family="Inter, Arial, sans-serif" font-size="16">passed</text>
-  <text x="1380" y="294" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="16" text-anchor="end">push to main</text>
+  <rect x="84" y="198" width="1432" height="722" rx="16" fill="#111827" fill-opacity="0.25"/>
 
-  <g font-family="Inter, Arial, sans-serif" font-size="20">
-    <rect x="160" y="360" width="1280" height="92" rx="16" fill="#ffffff" fill-opacity="0.05"/>
-    <circle cx="198" cy="406" r="16" fill="#22c55e"/>
-    <text x="238" y="414" fill="#f8fbff">Checkout repository</text>
-    <text x="1380" y="414" fill="#86efac" text-anchor="end">completed</text>
+  <rect x="108" y="260" width="1384" height="88" rx="10" fill="#111827" fill-opacity="0.65" stroke="#ffffff" stroke-opacity="0.06"/>
+  <text x="130" y="314" fill="#4ade80" font-family="Inter, Arial, sans-serif" font-size="30">✓</text>
+  <rect x="176" y="282" width="28" height="28" rx="6" fill="#0b1220" stroke="#ffffff" stroke-opacity="0.10"/>
+  <text x="220" y="306" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Vercel</text>
+  <text x="316" y="306" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="18">- Deployment has completed</text>
+  <text x="1430" y="306" fill="#60a5fa" font-family="Inter, Arial, sans-serif" font-size="18" text-anchor="end">Details</text>
 
-    <rect x="160" y="474" width="1280" height="92" rx="16" fill="#ffffff" fill-opacity="0.05"/>
-    <circle cx="198" cy="520" r="16" fill="#22c55e"/>
-    <text x="238" y="528" fill="#f8fbff">Setup Node.js</text>
-    <text x="1380" y="528" fill="#86efac" text-anchor="end">completed</text>
+  <rect x="108" y="364" width="1384" height="88" rx="10" fill="#111827" fill-opacity="0.65" stroke="#ffffff" stroke-opacity="0.06"/>
+  <text x="130" y="418" fill="#4ade80" font-family="Inter, Arial, sans-serif" font-size="30">✓</text>
+  <rect x="176" y="386" width="28" height="28" rx="6" fill="#0b1220" stroke="#ffffff" stroke-opacity="0.10"/>
+  <text x="220" y="410" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">CI Pipeline / build-and-test (push)</text>
+  <text x="660" y="410" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="18">Successful in 1m</text>
+  <text x="1430" y="410" fill="#60a5fa" font-family="Inter, Arial, sans-serif" font-size="18" text-anchor="end">Details</text>
 
-    <rect x="160" y="588" width="1280" height="92" rx="16" fill="#ffffff" fill-opacity="0.05"/>
-    <circle cx="198" cy="634" r="16" fill="#22c55e"/>
-    <text x="238" y="642" fill="#f8fbff">Run frontend lint &amp; build</text>
-    <text x="1380" y="642" fill="#86efac" text-anchor="end">passed</text>
-
-    <rect x="160" y="702" width="1280" height="92" rx="16" fill="#ffffff" fill-opacity="0.05"/>
-    <circle cx="198" cy="748" r="16" fill="#22c55e"/>
-    <text x="238" y="756" fill="#f8fbff">Run smart contract tests</text>
-    <text x="1380" y="756" fill="#86efac" text-anchor="end">passed</text>
-  </g>
-
-  <text x="80" y="926" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="18">This is the same CI flow the repository runs on GitHub Actions after each push to main.</text>
+  <text x="80" y="926" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="18">This mirrors the GitHub checks popup shown after deployment and CI finish successfully.</text>
 </svg>

@@ -33,34 +33,41 @@
   <rect x="670" y="136" rx="14" ry="14" width="230" height="20" fill="#ffffff" fill-opacity="0.10"/>
   <rect x="670" y="136" rx="14" ry="14" width="84" height="20" fill="#22d3ee" fill-opacity="0.45"/>
 
-  <rect x="566" y="200" rx="18" ry="18" width="146" height="34" fill="#0f2740" stroke="#67e8f9" stroke-opacity="0.32"/>
-  <text x="586" y="223" fill="#7dd3fc" font-family="Inter, Arial, sans-serif" font-size="13" letter-spacing="2">LEVEL 2</text>
+  <rect x="566" y="196" rx="18" ry="18" width="186" height="38" fill="#0f2740" stroke="#67e8f9" stroke-opacity="0.32"/>
+  <text x="619" y="220" fill="#7dd3fc" font-family="Inter, Arial, sans-serif" font-size="12" letter-spacing="2">LEVEL 2 · STELLAR</text>
+  <text x="585" y="238" fill="#7dd3fc" font-family="Inter, Arial, sans-serif" font-size="12" letter-spacing="2">CROWDFUNDING</text>
 
-  <text x="566" y="286" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Support the next</text>
-  <text x="566" y="324" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">wave of public goods.</text>
-  <text x="566" y="364" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="17">Wallet flow, contract calls,</text>
-  <text x="566" y="388" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="17">and live state tracking.</text>
+  <text x="566" y="294" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="800">Support the next</text>
+  <text x="566" y="332" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="800">wave of public</text>
+  <text x="566" y="370" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="800">goods.</text>
+  <text x="566" y="414" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="16">Use multiple wallet options, send a real</text>
+  <text x="566" y="438" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="16">contract call, and watch the funding state</text>
+  <text x="566" y="462" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="16">stay in sync with the testnet contract.</text>
 
-  <rect x="566" y="420" rx="16" ry="16" width="438" height="96" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.08"/>
-  <text x="586" y="449" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="12" letter-spacing="1.2">RAISED</text>
-  <text x="586" y="486" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">12,840 XLM</text>
-  <text x="836" y="486" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="13">51% funded</text>
+  <rect x="566" y="494" rx="16" ry="16" width="438" height="72" fill="#1a2337" fill-opacity="0.98" stroke="#ffffff" stroke-opacity="0.06"/>
+  <text x="742" y="522" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" text-anchor="middle">12,840 XLM</text>
+  <text x="742" y="542" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Raised</text>
 
-  <rect x="566" y="534" rx="16" ry="16" width="438" height="96" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.08"/>
-  <text x="586" y="563" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="12" letter-spacing="1.2">GOAL</text>
-  <text x="586" y="600" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">25,000 XLM</text>
-  <text x="836" y="600" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="13">main campaign</text>
+  <rect x="566" y="576" rx="16" ry="16" width="438" height="72" fill="#1a2337" fill-opacity="0.98" stroke="#ffffff" stroke-opacity="0.06"/>
+  <text x="742" y="604" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" text-anchor="middle">25,000 XLM</text>
+  <text x="742" y="624" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Goal</text>
 
-  <rect x="566" y="650" rx="999" ry="999" width="438" height="12" fill="#ffffff" fill-opacity="0.10"/>
-  <rect x="566" y="650" rx="999" ry="999" width="223" height="12" fill="url(#button)"/>
-  <text x="566" y="686" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="13">Live sync updates contract state automatically</text>
+  <rect x="566" y="662" rx="999" ry="999" width="438" height="10" fill="#1f2937"/>
+  <rect x="566" y="662" rx="999" ry="999" width="235" height="10" fill="url(#button)"/>
 
-  <rect x="566" y="710" rx="16" ry="16" width="438" height="58" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.10"/>
-  <text x="586" y="745" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Connect wallet</text>
-  <text x="888" y="745" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="13">Freighter / LOBSTR</text>
+  <rect x="566" y="686" rx="16" ry="16" width="438" height="54" fill="#0f172a" fill-opacity="0.86" stroke="#22d3ee" stroke-opacity="0.18"/>
+  <text x="586" y="713" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Freighter</text>
+  <text x="586" y="732" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="12">Browser extension wallet</text>
 
-  <rect x="566" y="782" rx="16" ry="16" width="438" height="58" fill="url(#button)"/>
-  <text x="728" y="818" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Call contract</text>
+  <rect x="566" y="754" rx="16" ry="16" width="438" height="54" fill="#0f172a" fill-opacity="0.75" stroke="#ffffff" stroke-opacity="0.05"/>
+  <text x="586" y="781" fill="#6b7280" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">LOBSTR</text>
+  <text x="586" y="800" fill="#6b7280" font-family="Inter, Arial, sans-serif" font-size="12">Mobile-first wallet support</text>
 
+  <rect x="566" y="822" rx="6" ry="6" width="438" height="8" fill="#1f2937"/>
+  <rect x="566" y="822" rx="6" ry="6" width="126" height="8" fill="#38bdf8"/>
+  <rect x="694" y="822" rx="6" ry="6" width="88" height="8" fill="#a855f7"/>
+  <rect x="784" y="822" rx="6" ry="6" width="220" height="8" fill="#1f2937"/>
+
+  <rect x="566" y="852" rx="18" ry="18" width="438" height="0" fill="none"/>
   <text x="80" y="916" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="18">The layout stays readable on a narrow phone-sized viewport without collapsing the donation controls.</text>
 </svg>
