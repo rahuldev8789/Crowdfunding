@@ -2,6 +2,26 @@
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://crowdfunding-mu-peach.vercel.app/) [![CI Pipeline](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen?logo=github-actions)](https://github.com/rahuldev8789/Crowdfunding/actions) [![Live Demo](https://img.shields.io/badge/Live%20Demo-Open-blue)](https://crowdfunding-mu-peach.vercel.app/)
 
+## Main Links
+
+- Live Vercel Deployment: https://crowdfunding-mu-peach.vercel.app/
+- Demo Video: https://drive.google.com/file/d/1ZTSrL93AISNDjMiIF1L-CjSQ9bmmtSSa/view?usp=sharing
+- Public GitHub Repository: https://github.com/rahuldev8789/Crowdfunding
+- Contract Explorer: https://stellar.expert/explorer/testnet/contract/CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX
+
+## Submission Snapshot
+
+- Public repository: complete
+- README documentation: complete
+- 10+ meaningful commits: complete
+- Live demo link: complete
+- Contract deployment address: complete
+- Transaction hash for contract interaction: complete
+- Mobile responsive screenshot: complete
+- CI/CD pipeline screenshot: complete
+- Test output screenshot: complete
+- Demo video link: complete
+
 ## Overview
 
 Stellar Crowdfunding DApp is a production-oriented Level 3 Stellar project that demonstrates advanced smart contract behavior, event-driven updates, responsive frontend engineering, automated testing, and deployment readiness. The project is structured to resemble a real-world dApp rather than a beginner demo.
