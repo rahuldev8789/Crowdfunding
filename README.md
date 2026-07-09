@@ -33,95 +33,24 @@
 ### Test Output
 ![Test Output](./public/screenshots/test-output.svg)
 
-## Overview
+## What It Includes
 
-Stellar Crowdfunding DApp is a production-oriented Level 3 Stellar project that demonstrates advanced smart contract behavior, event-driven updates, responsive frontend engineering, automated testing, and deployment readiness. The project is structured to resemble a real-world dApp rather than a beginner demo.
-
-## At A Glance
-
-| Area | What It Shows |
-| --- | --- |
-| Smart Contracts | Campaign lifecycle logic, donor accounting, funding state transitions |
-| Frontend | Wallet flow, loading states, error handling, mobile responsiveness |
-| Real-Time UX | Event-driven updates after on-chain actions |
-| Delivery | Live deployment, contract explorer link, CI badge, screenshots |
-| Validation | Contract and frontend test coverage |
-
-## Architecture
-
-- Smart contract layer built for campaign lifecycle management, donor accounting, and funding state transitions
-- Frontend layer focused on wallet interaction, loading states, error handling, and mobile responsiveness
-- Event-driven updates designed to support real-time UI refresh after on-chain actions
-- CI/CD pipeline for repeatable validation before deployment
-- Documentation layer that captures links, contract metadata, screenshots, and setup steps
-
-## Advanced Smart Contracts + Production-Ready DApps
-
-### Requirement Coverage
-
-- Advanced smart contract development
-- Inter-contract communication
-- Event streaming and real-time updates
-- CI/CD pipeline setup
-- Smart contract deployment workflow
-- Mobile responsive frontend development
-- Error handling and loading states
-- Writing tests for contracts and frontend
-- Production-ready architecture practices
-- Documentation and demo presentation
-
-### Implementation Notes
-
-- Contract state is organized around campaign goals, funds raised, ownership, donor contributions, and funded status
-- The contract emits donation-related events so the frontend can react without requiring a manual refresh
-- The frontend is built to handle wallet connection flow, transaction submission, user rejection, and balance-related failures gracefully
-- UI layout adapts to desktop and mobile screens, keeping the experience usable across viewport sizes
-- The repository includes both smart contract and frontend test coverage to support safe iteration
-
-### Production Signals
-
-- Public deployment is available through Vercel
-- Contract metadata is exposed through a public testnet explorer
-- CI status is visible from the repository badge
-- Screenshots document responsive UI and pipeline verification
-- The local setup supports repeatable build, lint, and test runs
-
-## Submission Checklist
-
-Required submission items:
-
-- Public GitHub repository
-- README with complete documentation
-- Minimum 10 meaningful commits
-- Live demo link on Vercel, Netlify, or similar
-- Contract deployment address
-- Transaction hash for contract interaction
-- Screenshot showing mobile responsive UI
-- Screenshot showing CI/CD pipeline running
-- Screenshot showing test output with 3+ passing tests
-- Demo video link with 1 to 2 minutes of presentation
-
-## Project Highlights
-
-- Campaign-oriented smart contract flow with persisted donor and funding data
-- Real-time event emission for donation activity
-- Responsive frontend with production-style spacing, layout, and state handling
-- Loading, success, and error states for user actions
-- CI workflow for build and test verification
-- Separate verification paths for contract logic and frontend utilities
+- Wallet connection flow for Freighter and LOBSTR
+- Contract donation call flow with Soroban testnet RPC
+- Live polling of contract state after actions
+- Frontend error handling and loading states
+- Contract-side tests for initialize, donate, getters, and funded state
+- Frontend helper tests for formatting and contract URL generation
+- GitHub Actions CI for lint, build, and contract tests
 
 ## Verification
 
-### Contract and Frontend Tests
+### Local Checks
 
-The project is designed to satisfy the requirement for 3+ passing tests across the codebase and includes coverage on both sides of the stack.
-
-### Deployment Proof
-
-- Public GitHub Repository: https://github.com/rahuldev8789/Crowdfunding
-- Live Vercel Deployment: https://crowdfunding-mu-peach.vercel.app/
-- Demo Video: https://drive.google.com/file/d/1ZTSrL93AISNDjMiIF1L-CjSQ9bmmtSSa/view?usp=sharing
-- Contract Explorer: https://stellar.expert/explorer/testnet/contract/CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX
+- Frontend lint: `npm.cmd run lint`
+- Frontend build: `npm.cmd run build`
+- Frontend tests: `npm.cmd run test`
+- Contract tests: `cargo test --manifest-path contracts/crowdfunding/contracts/hello-world/Cargo.toml`
 
 ### Contract Details
 
@@ -157,8 +86,3 @@ The project is designed to satisfy the requirement for 3+ passing tests across t
    ```bash
    npm run build
    ```
-
-## Notes
-
-- Verified locally on `main` with 25 commits and a passing frontend test suite
-- The README is organized for submission review and production-style presentation
