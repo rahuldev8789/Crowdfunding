@@ -1,5 +1,6 @@
 #![no_std]
-use soroban_sdk::{contract, contractevent, contractimpl, symbol_short, vec, Address, Env, IntoVal, String, Symbol};
+use reward_badge::ContractClient as RewardBadgeClient;
+use soroban_sdk::{contract, contractevent, contractimpl, symbol_short, Address, Env, String, Symbol};
 
 const GOAL: Symbol = symbol_short!("goal");
 const RAISED: Symbol = symbol_short!("raised");
@@ -51,11 +52,8 @@ impl Contract {
             env.storage().persistent().set(&FUNDED, &true);
         }
 
-        let _: i128 = env.invoke_contract(
-            &reward_contract,
-            &symbol_short!("credit"),
-            vec![&env, donor.clone().into_val(&env), amount.into_val(&env)],
-        );
+        let reward_client = RewardBadgeClient::new(&env, &reward_contract);
+        let _: i128 = reward_client.credit(&donor, &amount);
         DonationReceived { donor, amount, raised, goal }.publish(&env);
         raised
     }
