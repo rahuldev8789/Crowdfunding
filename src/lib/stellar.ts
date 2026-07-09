@@ -41,9 +41,11 @@ export const getContractSnapshot = async () => {
 export const buildDonationTransaction = async ({
   donor,
   amount,
+  rewardContractId,
 }: {
   donor: string
   amount: number
+  rewardContractId: string
 }) => {
   let account
   try {
@@ -79,7 +81,11 @@ export const buildDonationTransaction = async ({
       Operation.invokeContractFunction({
         contract: CONTRACT_ID,
         function: 'donate',
-        args: [nativeToScVal(donor, { type: 'string' }), nativeToScVal(BigInt(Math.round(amount)), { type: 'i128' })],
+        args: [
+          nativeToScVal(donor, { type: 'string' }),
+          nativeToScVal(BigInt(Math.round(amount)), { type: 'i128' }),
+          nativeToScVal(rewardContractId, { type: 'address' }),
+        ],
       }),
     )
     .setTimeout(300)

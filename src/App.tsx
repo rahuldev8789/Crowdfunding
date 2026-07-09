@@ -24,6 +24,7 @@ const WALLET_OPTIONS: WalletOption[] = [
 ]
 
 function App() {
+  const rewardContractId = import.meta.env.VITE_REWARD_CONTRACT_ID ?? ''
   const [address, setAddress] = useState('')
   const [selectedWallet, setSelectedWallet] = useState(WALLET_OPTIONS[0].id)
   const [status, setStatus] = useState<TransactionStatus>('idle')
@@ -175,6 +176,12 @@ function App() {
       return
     }
 
+    if (!rewardContractId) {
+      markError('wallet-unavailable', 'Set VITE_REWARD_CONTRACT_ID to enable the reward contract call.')
+      pushDebugStep('Donation blocked: missing reward contract id')
+      return
+    }
+
     let donationAmount = 0
     try {
       donationAmount = readAmount()
@@ -195,6 +202,7 @@ function App() {
       const tx = await buildDonationTransaction({
         donor: address,
         amount: donationAmount,
+        rewardContractId,
       })
 
       pushDebugStep('Signing donation transaction')

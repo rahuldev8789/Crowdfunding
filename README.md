@@ -31,6 +31,7 @@
 - Contract-side tests for initialize, donate, getters, and funded state
 - Frontend helper tests for formatting and contract URL generation
 - GitHub Actions CI for lint, build, and contract tests
+- Reward-contract calls are wired through `VITE_REWARD_CONTRACT_ID`
 
 ## Verification
 

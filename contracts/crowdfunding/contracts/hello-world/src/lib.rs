@@ -1,5 +1,5 @@
 #![no_std]
-use soroban_sdk::{contract, contractevent, contractimpl, symbol_short, Env, String, Symbol};
+use soroban_sdk::{contract, contractevent, contractimpl, symbol_short, vec, Address, Env, IntoVal, String, Symbol};
 
 const GOAL: Symbol = symbol_short!("goal");
 const RAISED: Symbol = symbol_short!("raised");
@@ -33,7 +33,7 @@ impl Contract {
         env.storage().persistent().set(&OWNER, &owner);
     }
 
-    pub fn donate(env: Env, donor: String, amount: i128) -> i128 {
+    pub fn donate(env: Env, donor: String, amount: i128, reward_contract: Address) -> i128 {
         if amount <= 0 {
             panic!("donation must be positive");
         }
@@ -51,6 +51,11 @@ impl Contract {
             env.storage().persistent().set(&FUNDED, &true);
         }
 
+        let _: i128 = env.invoke_contract(
+            &reward_contract,
+            &symbol_short!("credit"),
+            vec![&env, donor.clone().into_val(&env), amount.into_val(&env)],
+        );
         DonationReceived { donor, amount, raised, goal }.publish(&env);
         raised
     }
