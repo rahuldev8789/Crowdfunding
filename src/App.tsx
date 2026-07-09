@@ -268,8 +268,8 @@ function App() {
           <p className="eyebrow">Level 2 · Stellar crowdfunding</p>
           <h1>Support the next wave of public goods.</h1>
           <p className="lead">
-            Use multiple wallet options, send a real contract call, and watch the funding state stay in sync with
-            the testnet contract.
+            Use multiple wallet options, send a contract call, and review the funding state from the testnet
+            contract.
           </p>
 
           <div className="wallet-option-grid">
@@ -315,7 +315,7 @@ function App() {
 
         <div className="panel-card">
           <div className={`status-pill status-${status}`}>{status.toUpperCase()}</div>
-          <h2>Wallet, contract, and live state</h2>
+          <h2>Wallet, contract, and state</h2>
           <p>{message}</p>
 
           <div className="button-row">
@@ -384,8 +384,8 @@ function App() {
 
       <section className="event-panel">
         <div className="section-heading">
-          <h2>Real-time sync</h2>
-          <p>We poll the deployed contract and mirror each completed donation in the activity feed.</p>
+          <h2>Contract sync</h2>
+          <p>We poll the contract and show each completed donation in the activity feed.</p>
         </div>
 
         <div className="activity-list">

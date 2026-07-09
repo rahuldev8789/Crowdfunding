@@ -4,20 +4,19 @@
 
 ## Links
 
-- Live Vercel Deployment: https://crowdfunding-mu-peach.vercel.app/
-- Demo Video: https://drive.google.com/file/d/1ZTSrL93AISNDjMiIF1L-CjSQ9bmmtSSa/view?usp=sharing
-- Public GitHub Repository: https://github.com/rahuldev8789/Crowdfunding
-- Contract Explorer: https://stellar.expert/explorer/testnet/contract/CB6Z2H3NUTBIYY7CUR5PKCF4YROK7SYHVP72GM54FZKJQMQZQZINPXTE
-- Reward Contract Explorer: https://stellar.expert/explorer/testnet/contract/CAAPAPB4W7DVSIJOXHGCXJ45HFNFUBAFAODWASY7IKLFW3CX6GKJCB3C
+- Live app: https://crowdfunding-mu-peach.vercel.app/
+- Demo video: https://drive.google.com/file/d/1ZTSrL93AISNDjMiIF1L-CjSQ9bmmtSSa/view?usp=sharing
+- GitHub repository: https://github.com/rahuldev8789/Crowdfunding
+- Crowdfunding contract explorer: https://stellar.expert/explorer/testnet/contract/CB6Z2H3NUTBIYY7CUR5PKCF4YROK73Y5HWAF7RZAYIMRL322I7WIZ6L
+- Reward contract explorer: https://stellar.expert/explorer/testnet/contract/CAAPAPB4W7DIJOXHGCXJ45HFNFUBAFAODWASY7IKLFW3CX6GKJCB3C
+
 ## Screenshots
 
 ### Mobile Responsive UI
 <img width="262" height="576" alt="Screenshot 2026-07-10 033433" src="https://github.com/user-attachments/assets/86ed95dc-e18b-42b5-a306-7ec2c6a70e0e" />
 
-
-### CI/CD Pipeline Running
+### CI Status
 <img width="857" height="250" alt="Screenshot 2026-07-10 033825" src="https://github.com/user-attachments/assets/519b43b3-c199-4722-ba8e-835a31ce0a06" />
-
 
 ### Test Output
 ![Test Output](./public/screenshots/test-output.svg)
