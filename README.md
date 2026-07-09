@@ -2,15 +2,13 @@
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://crowdfunding-mu-peach.vercel.app/) [![CI Pipeline](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen?logo=github-actions)](https://github.com/rahuldev8789/Crowdfunding/actions) [![Live Demo](https://img.shields.io/badge/Live%20Demo-Open-blue)](https://crowdfunding-mu-peach.vercel.app/)
 
-## Main Links
+## Links
 
 - Live Vercel Deployment: https://crowdfunding-mu-peach.vercel.app/
 - Demo Video: https://drive.google.com/file/d/1ZTSrL93AISNDjMiIF1L-CjSQ9bmmtSSa/view?usp=sharing
 - Public GitHub Repository: https://github.com/rahuldev8789/Crowdfunding
 - Contract Explorer: https://stellar.expert/explorer/testnet/contract/CB6Z2H3NUTBIYY7CUR5PKCF4YROK7SYHVP72GM54FZKJQMQZQZINPXTE
 - Reward Contract Explorer: https://stellar.expert/explorer/testnet/contract/CAAPAPB4W7DVSIJOXHGCXJ45HFNFUBAFAODWASY7IKLFW3CX6GKJCB3C
-- `VITE_REWARD_CONTRACT_ID` can override the built-in reward-contract address if you deploy your own testnet copy.
-
 ## Screenshots
 
 ### Mobile Responsive UI
@@ -24,16 +22,13 @@
 ### Test Output
 ![Test Output](./public/screenshots/test-output.svg)
 
-## What It Includes
+## Repository Contents
 
-- Wallet connection flow for Freighter and LOBSTR
-- Contract donation call flow with Soroban testnet RPC
-- Live polling of contract state after actions
-- Frontend error handling and loading states
-- Contract-side tests for initialize, donate, getters, and funded state
-- Frontend helper tests for formatting and contract URL generation
-- GitHub Actions CI for lint, build, and contract tests
-- Reward-contract calls use the deployed testnet reward contract by default and can be overridden with `VITE_REWARD_CONTRACT_ID`
+- Frontend app in `src/`
+- Soroban contract code in `contracts/crowdfunding/contracts/`
+- Frontend tests
+- Contract tests
+- GitHub Actions workflow for lint, build, and tests
 
 ## Verification
 

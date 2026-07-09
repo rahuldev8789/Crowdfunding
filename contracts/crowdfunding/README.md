@@ -1,16 +1,16 @@
 # Crowdfunding Contracts
 
-This folder contains the Soroban contract used by the Stellar Crowdfunding DApp.
+This folder contains the Soroban contract code for the crowdfunding app.
 
 ## Layout
 
 ```text
 contracts/hello-world/
-├── Cargo.toml
-├── Makefile
-└── src
-    ├── lib.rs
-    └── test.rs
+|-- Cargo.toml
+|-- Makefile
+`-- src
+    |-- lib.rs
+    `-- test.rs
 ```
 
 ## What It Does
