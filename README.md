@@ -89,6 +89,7 @@ The project is designed to satisfy the requirement for 3+ passing tests across t
 
 - Public GitHub Repository: https://github.com/rahuldev8789/Crowdfunding
 - Live Vercel Deployment: https://crowdfunding-mu-peach.vercel.app/
+- Demo Video: https://drive.google.com/file/d/1ZTSrL93AISNDjMiIF1L-CjSQ9bmmtSSa/view?usp=sharing
 - Contract Explorer: https://stellar.expert/explorer/testnet/contract/CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX
 
 ### Contract Details
@@ -139,6 +140,5 @@ The project is designed to satisfy the requirement for 3+ passing tests across t
 
 ## Notes
 
-- Demo video link should be added before final submission so the checklist is complete
 - Verified locally on `main` with 25 commits and a passing frontend test suite
 - The README is organized for submission review and production-style presentation
