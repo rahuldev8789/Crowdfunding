@@ -8,6 +8,7 @@
 - Demo Video: https://drive.google.com/file/d/1ZTSrL93AISNDjMiIF1L-CjSQ9bmmtSSa/view?usp=sharing
 - Public GitHub Repository: https://github.com/rahuldev8789/Crowdfunding
 - Contract Explorer: https://stellar.expert/explorer/testnet/contract/CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX
+- Set `VITE_REWARD_CONTRACT_ID` in `.env` with your deployed reward contract before donating on testnet.
 
 ## Screenshots
 
