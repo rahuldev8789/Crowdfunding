@@ -1,11 +1,21 @@
 #![no_std]
-use soroban_sdk::{contract, contractimpl, symbol_short, Env, String, Symbol};
+use soroban_sdk::{contract, contractevent, contractimpl, symbol_short, Env, String, Symbol};
 
 const GOAL: Symbol = symbol_short!("goal");
 const RAISED: Symbol = symbol_short!("raised");
 const OWNER: Symbol = symbol_short!("owner");
 const DONOR_PREFIX: Symbol = symbol_short!("donor");
 const FUNDED: Symbol = symbol_short!("funded");
+
+#[contractevent]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct DonationReceived {
+    #[topic]
+    pub donor: String,
+    pub amount: i128,
+    pub raised: i128,
+    pub goal: i128,
+}
 
 #[contract]
 pub struct Contract;
@@ -41,8 +51,7 @@ impl Contract {
             env.storage().persistent().set(&FUNDED, &true);
         }
 
-        env.events()
-            .publish(("donation", "received"), (donor, amount, raised, goal));
+        DonationReceived { donor, amount, raised, goal }.publish(&env);
         raised
     }
 

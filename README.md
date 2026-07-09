@@ -9,19 +9,6 @@
 - Public GitHub Repository: https://github.com/rahuldev8789/Crowdfunding
 - Contract Explorer: https://stellar.expert/explorer/testnet/contract/CDA2XIUNNPXW3XR2N752LCVATZDG2CQEK2L2LRVKSXRZWHZ4RERYEFOX
 
-## Submission Snapshot
-
-- Public repository: complete
-- README documentation: complete
-- 10+ meaningful commits: complete
-- Live demo link: complete
-- Contract deployment address: complete
-- Transaction hash for contract interaction: complete
-- Mobile responsive screenshot: complete
-- CI/CD pipeline screenshot: complete
-- Test output screenshot: complete
-- Demo video link: complete
-
 ## Screenshots
 
 ### Mobile Responsive UI
