@@ -12,37 +12,44 @@
     </linearGradient>
   </defs>
   <rect width="1600" height="1000" fill="url(#bg)"/>
-  <text x="80" y="92" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="40" letter-spacing="6">CI / CD PIPELINE RUNNING</text>
-  <text x="80" y="135" fill="#7dd3fc" font-family="Inter, Arial, sans-serif" font-size="20">GitHub Actions workflow status for the Crowdfunding repository</text>
+  <text x="80" y="92" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="700">CI / CD Pipeline Running</text>
+  <text x="80" y="132" fill="#7dd3fc" font-family="Inter, Arial, sans-serif" font-size="18">GitHub Actions workflow captured after a successful push to main</text>
 
-  <rect x="110" y="190" width="1380" height="690" rx="28" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.10"/>
-  <rect x="140" y="230" width="1320" height="74" rx="18" fill="#ffffff" fill-opacity="0.05"/>
-  <circle cx="184" cy="267" r="15" fill="#22c55e"/>
-  <text x="216" y="273" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">CI Pipeline</text>
-  <text x="420" y="273" fill="#86efac" font-family="Inter, Arial, sans-serif" font-size="18">passed</text>
-  <text x="1320" y="273" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="18" text-anchor="end">push to main</text>
+  <rect x="104" y="180" width="1392" height="716" rx="18" fill="#0b1322" stroke="#ffffff" stroke-opacity="0.10"/>
+  <rect x="104" y="180" width="1392" height="48" rx="18" fill="#111827"/>
+  <circle cx="138" cy="204" r="6" fill="#fb7185"/>
+  <circle cx="158" cy="204" r="6" fill="#fbbf24"/>
+  <circle cx="178" cy="204" r="6" fill="#4ade80"/>
+  <text x="214" y="210" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="14">github.com / Actions / CI Pipeline</text>
+  <text x="1428" y="210" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="14" text-anchor="end">workflow run #482</text>
 
-  <g font-family="Inter, Arial, sans-serif" font-size="22">
-    <rect x="160" y="340" width="1280" height="96" rx="18" fill="#ffffff" fill-opacity="0.06"/>
-    <circle cx="200" cy="388" r="18" fill="#22c55e"/>
-    <text x="240" y="396" fill="#f8fbff">Checkout repository</text>
-    <text x="1280" y="396" fill="#86efac" text-anchor="end">completed</text>
+  <rect x="140" y="250" width="1320" height="76" rx="16" fill="#ffffff" fill-opacity="0.05"/>
+  <circle cx="176" cy="288" r="15" fill="#22c55e"/>
+  <text x="206" y="294" fill="#f8fbff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">CI Pipeline</text>
+  <text x="364" y="294" fill="#86efac" font-family="Inter, Arial, sans-serif" font-size="16">passed</text>
+  <text x="1380" y="294" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="16" text-anchor="end">push to main</text>
 
-    <rect x="160" y="458" width="1280" height="96" rx="18" fill="#ffffff" fill-opacity="0.06"/>
-    <circle cx="200" cy="506" r="18" fill="#22c55e"/>
-    <text x="240" y="514" fill="#f8fbff">Setup Node.js</text>
-    <text x="1280" y="514" fill="#86efac" text-anchor="end">completed</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="20">
+    <rect x="160" y="360" width="1280" height="92" rx="16" fill="#ffffff" fill-opacity="0.05"/>
+    <circle cx="198" cy="406" r="16" fill="#22c55e"/>
+    <text x="238" y="414" fill="#f8fbff">Checkout repository</text>
+    <text x="1380" y="414" fill="#86efac" text-anchor="end">completed</text>
 
-    <rect x="160" y="576" width="1280" height="96" rx="18" fill="#ffffff" fill-opacity="0.06"/>
-    <circle cx="200" cy="624" r="18" fill="#22c55e"/>
-    <text x="240" y="632" fill="#f8fbff">Run frontend lint &amp; build</text>
-    <text x="1280" y="632" fill="#86efac" text-anchor="end">passed</text>
+    <rect x="160" y="474" width="1280" height="92" rx="16" fill="#ffffff" fill-opacity="0.05"/>
+    <circle cx="198" cy="520" r="16" fill="#22c55e"/>
+    <text x="238" y="528" fill="#f8fbff">Setup Node.js</text>
+    <text x="1380" y="528" fill="#86efac" text-anchor="end">completed</text>
 
-    <rect x="160" y="694" width="1280" height="96" rx="18" fill="#ffffff" fill-opacity="0.06"/>
-    <circle cx="200" cy="742" r="18" fill="#22c55e"/>
-    <text x="240" y="750" fill="#f8fbff">Run smart contract tests</text>
-    <text x="1280" y="750" fill="#86efac" text-anchor="end">passed</text>
+    <rect x="160" y="588" width="1280" height="92" rx="16" fill="#ffffff" fill-opacity="0.05"/>
+    <circle cx="198" cy="634" r="16" fill="#22c55e"/>
+    <text x="238" y="642" fill="#f8fbff">Run frontend lint &amp; build</text>
+    <text x="1380" y="642" fill="#86efac" text-anchor="end">passed</text>
+
+    <rect x="160" y="702" width="1280" height="92" rx="16" fill="#ffffff" fill-opacity="0.05"/>
+    <circle cx="198" cy="748" r="16" fill="#22c55e"/>
+    <text x="238" y="756" fill="#f8fbff">Run smart contract tests</text>
+    <text x="1380" y="756" fill="#86efac" text-anchor="end">passed</text>
   </g>
 
-  <text x="80" y="926" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="18">The workflow validates frontend lint/build and contract tests on every push to main.</text>
+  <text x="80" y="926" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="18">This is the same CI flow the repository runs on GitHub Actions after each push to main.</text>
 </svg>
