@@ -161,6 +161,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-self: start;
 }
 
 .status-pill {
@@ -188,8 +189,7 @@ a {
   color: #fda4af;
 }
 
-.primary-btn,
-.secondary-btn {
+.primary-btn {
   border: 0;
   border-radius: 999px;
   padding: 12px 16px;
@@ -199,7 +199,6 @@ a {
 }
 
 .primary-btn:hover,
-.secondary-btn:hover,
 .wallet-chip:hover {
   transform: translateY(-1px);
 }
@@ -209,27 +208,19 @@ a {
   color: white;
 }
 
-.secondary-btn {
-  background: #f59e0b;
-  color: #111827;
-}
-
-.ghost-btn {
-  background: rgba(255, 255, 255, 0.08);
-  color: #f8fafc;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
 .button-row {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
+.button-row .primary-btn {
+  flex: 1 1 0;
+}
+
 .address-box,
 .tx-box,
-.contract-meta,
-.fresh-account-box {
+.contract-meta {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 12px 14px;
@@ -262,48 +253,9 @@ a {
 
 .address-box span,
 .tx-box span,
-.contract-meta span,
-.fresh-account-box span {
+.contract-meta span {
   font-size: 0.82rem;
   color: #93c5fd;
-}
-
-.fresh-account-box p {
-  margin: 0;
-  color: #cbd5e1;
-  font-size: 0.88rem;
-}
-
-.fresh-key-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.mini-btn {
-  border: 1px solid rgba(103, 232, 249, 0.28);
-  background: rgba(34, 211, 238, 0.12);
-  color: #dbeafe;
-  border-radius: 999px;
-  padding: 8px 12px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.mini-btn:hover {
-  transform: translateY(-1px);
-}
-
-.fresh-note {
-  color: #93c5fd;
-}
-
-.fresh-copy-status {
-  color: #86efac;
-  font-size: 0.82rem;
 }
 
 code {
@@ -341,6 +293,14 @@ code {
 .tx-grid {
   display: grid;
   gap: 10px;
+}
+
+.tx-grid > * {
+  min-width: 0;
+}
+
+.tx-grid .tx-box a {
+  word-break: break-word;
 }
 
 .event-panel {

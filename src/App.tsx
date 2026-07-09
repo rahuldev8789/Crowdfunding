@@ -7,7 +7,6 @@ import type { DonationEvent, TransactionStatus, WalletErrorInfo, WalletOption, S
 import {
   CONTRACT_ID,
   TESTNET_NETWORK_PASSPHRASE,
-  createFreshTestnetAccount,
   buildDonationTransaction,
   formatAmount,
   getContractSnapshot,
@@ -40,8 +39,6 @@ function App() {
   const [walletsReady, setWalletsReady] = useState(false)
   const [availableWalletIds, setAvailableWalletIds] = useState<string[]>([])
   const [debugSteps, setDebugSteps] = useState<string[]>(['App booted'])
-  const [freshAccount, setFreshAccount] = useState<{ publicKey: string; secretKey: string } | null>(null)
-  const [copyState, setCopyState] = useState<'idle' | 'public' | 'secret'>('idle')
   const hasBootedRef = useRef(false)
 
   const percent = useMemo(() => Math.min(100, Math.round((raised / goal) * 100)), [goal, raised])
@@ -208,10 +205,10 @@ function App() {
 
       pushDebugStep('Submitting signed transaction')
       const submit = await submitSignedTransaction(signedTxXdr)
-      setStatus(submit.status === 'ERROR' ? 'error' : submit.status === 'PENDING' ? 'pending' : 'success')
+      setStatus(submit.status === 'ERROR' ? 'error' : 'success')
       setMessage(
         submit.status === 'PENDING'
-          ? 'Transaction signed and submitted. Watching the network for confirmation...'
+          ? 'Transaction signed and submitted. The network is still confirming it.'
           : submit.status === 'ERROR'
             ? 'The network rejected the submitted transaction.'
             : 'Donation accepted by the network.',
@@ -225,7 +222,7 @@ function App() {
           kind: 'donation',
           donor: address,
           amount: donationAmount,
-          status: submit.status === 'ERROR' ? 'error' : submit.status === 'PENDING' ? 'pending' : 'success',
+          status: submit.status === 'ERROR' ? 'error' : 'success',
         },
         ...events,
       ])
@@ -258,44 +255,6 @@ function App() {
       }
       setSyncStatus('error')
       pushDebugStep(`Donation failed: ${rawMessage}`)
-    }
-  }
-
-  const disconnectWallet = async () => {
-    await StellarWalletsKit.disconnect()
-    setAddress('')
-    setStatus('idle')
-    setMessage('Wallet disconnected. Reconnect when you want to donate again.')
-    setTxHash('')
-  }
-
-  const createFreshAccount = async () => {
-    setStatus('pending')
-    setMessage('Creating and funding a fresh testnet account...')
-    setErrorInfo(null)
-    pushDebugStep('Creating fresh testnet account')
-
-    try {
-      const account = await createFreshTestnetAccount()
-      setFreshAccount(account)
-      setMessage('Fresh testnet account created and funded. Import the secret key into Freighter to sign with it.')
-      setStatus('success')
-      pushDebugStep(`Fresh account funded: ${account.publicKey.slice(0, 8)}...`)
-    } catch (error) {
-      const rawMessage = error instanceof Error ? error.message : 'Fresh testnet account creation failed.'
-      markError('wallet-unavailable', rawMessage)
-      pushDebugStep(`Fresh account failed: ${rawMessage}`)
-    }
-  }
-
-  const copyFreshKey = async (value: string, kind: 'public' | 'secret') => {
-    try {
-      await navigator.clipboard.writeText(value)
-      setCopyState(kind)
-      pushDebugStep(`Copied fresh ${kind} key`)
-    } catch {
-      setCopyState('idle')
-      pushDebugStep(`Copy failed for fresh ${kind} key`)
     }
   }
 
@@ -360,12 +319,6 @@ function App() {
             <button type="button" onClick={connectWallet} className="primary-btn" disabled={!walletsReady}>
               {address ? 'Switch wallet' : 'Connect wallet'}
             </button>
-            <button type="button" onClick={createFreshAccount} className="secondary-btn">
-              Fresh testnet account
-            </button>
-            <button type="button" onClick={disconnectWallet} className="secondary-btn ghost-btn">
-              Disconnect
-            </button>
           </div>
 
           {address ? (
@@ -414,29 +367,6 @@ function App() {
             <span>Contract owner</span>
             <code>{contractOwner}</code>
           </div>
-
-          {freshAccount ? (
-            <div className="fresh-account-box">
-              <span>Fresh testnet account</span>
-              <p>Copy the key you need. Import the secret key into Freighter if you want to sign from the fresh account.</p>
-              <div className="fresh-key-row">
-                <code>Public key: {freshAccount.publicKey}</code>
-                <button type="button" className="mini-btn" onClick={() => void copyFreshKey(freshAccount.publicKey, 'public')}>
-                  Copy public
-                </button>
-              </div>
-              <div className="fresh-key-row">
-                <code>Secret key: {freshAccount.secretKey}</code>
-                <button type="button" className="mini-btn" onClick={() => void copyFreshKey(freshAccount.secretKey, 'secret')}>
-                  Copy secret
-                </button>
-              </div>
-              <p className="fresh-note">
-                Next step: open Freighter, import the secret key, switch to that account, then press <strong>Connect wallet</strong>.
-              </p>
-              {copyState !== 'idle' ? <p className="fresh-copy-status">Copied {copyState} key to clipboard.</p> : null}
-            </div>
-          ) : null}
 
           <div className="debug-box">
             <span>Debug trail</span>
