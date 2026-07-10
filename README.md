@@ -128,7 +128,7 @@ GitHub Actions runs the main project checks on push and pull request events:
 ## Screenshots
 
 ### Windows Dashboard
-![Windows Dashboard](./public/screenshots/windows-dashboard.svg)
+<img width="1920" height="1020" alt="Screenshot 2026-07-10 213853" src="https://github.com/user-attachments/assets/fd51e9b6-41ca-4ba3-b2b8-36e177099c94" />
 
 ### Mobile Responsive UI
 <img width="262" height="576" alt="Screenshot 2026-07-10 033433" src="https://github.com/user-attachments/assets/86ed95dc-e18b-42b5-a306-7ec2c6a70e0e" />
