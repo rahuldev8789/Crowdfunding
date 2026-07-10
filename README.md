@@ -139,12 +139,27 @@ GitHub Actions runs the main project checks on push and pull request events:
 ### Test Output
 ![Test Output](./public/screenshots/test-output.svg)
 
+## Folder Structure
+
+```text
+Crowdfunding/
+|-- .github/                     GitHub Actions workflow
+|-- contracts/
+|   |-- crowdfunding/
+|   |   `-- contracts/          Soroban crowdfunding + reward contracts
+|-- public/
+|   `-- screenshots/            Submission screenshots and proof assets
+|-- src/                        React app, wallet flow, and Stellar helpers
+|-- README.md                   Project overview and submission proof
+`-- package.json                Frontend scripts and dependencies
+```
+
 ## Repository Contents
 
 - Frontend app in `src/`
 - Soroban contract code in `contracts/crowdfunding/contracts/`
-- Frontend tests
-- Contract tests
+- Frontend tests in `src/`
+- Contract tests in `contracts/crowdfunding/contracts/`
 - GitHub Actions workflow for lint, build, and tests
 - Public screenshot assets in `public/screenshots/`
 - Deployment and explorer links for the live Stellar testnet deployment
