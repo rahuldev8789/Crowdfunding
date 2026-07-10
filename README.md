@@ -4,9 +4,9 @@
 
 ## Overview
 
-Stellar Crowdfunding DApp is a production-style Web3 fundraising app built for the Stellar testnet. It combines a responsive frontend, Soroban smart contracts, reward-token inter-contract calls, live contract syncing, and CI/CD coverage into a single submission-ready project.
+Stellar Crowdfunding DApp is a production-style Web3 fundraising app built for the Stellar testnet. It combines a responsive frontend, Soroban smart contracts, reward-token inter-contract calls, live contract syncing, and CI/CD coverage into a single competition-ready project.
 
-The goal is to move beyond a basic demo and show what a realistic dApp looks like when the contract, frontend, deployment workflow, and documentation are treated as one system.
+The emphasis is on clear architecture, visible proof, and a polished reviewer experience, with the contract, frontend, deployment workflow, and documentation treated as one system.
 
 ## Links
 
@@ -26,7 +26,7 @@ The goal is to move beyond a basic demo and show what a realistic dApp looks lik
 - Responsive desktop and mobile presentation
 - Frontend and contract tests
 - GitHub Actions CI pipeline
-- Vercel deployment for the public app
+- Production deployment on Vercel
 
 ## Architecture
 
@@ -185,7 +185,7 @@ Crowdfunding/
 
 - The contract is deployed on Stellar testnet and can be explored using the public links above.
 - The app is intentionally built around live chain reads and writes rather than static UI-only state.
-- The README includes both proof screenshots and direct links so reviewers can verify the build quickly.
+- The README keeps proof screenshots and direct links up front so reviewers can verify the build quickly.
 
 ## Local Setup
 
