@@ -116,7 +116,7 @@ GitHub Actions runs the main project checks on push and pull request events:
 | --- | --- | --- |
 | Public GitHub repository | Done | Repository link above |
 | Complete README documentation | Done | This file |
-| 10+ meaningful commits | Done | 43 commits in history |
+| 10+ meaningful commits | Done | 40+ commits in history |
 | Live demo link | Done | Vercel app link above |
 | Contract deployment address | Done | Contract details below |
 | Transaction hash for contract interaction | Done | Contract details below |
