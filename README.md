@@ -219,10 +219,11 @@ Every push and pull request against the `main` branch automatically triggers the
 All verification screenshots below are permanently hosted inside the repository under `./public/screenshots/` (guaranteeing zero expiring URLs or authentication barriers for competition judges):
 
 ### 1. Desktop & Windows Dashboard
-![Windows Dashboard](./public/screenshots/windows-dashboard.svg)
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/a31356b0-d345-4c40-a5c1-69f7c8ecc514" />
+
 
 ### 2. Mobile Responsive UI Layout
-![Mobile Responsive UI](./public/screenshots/mobile-responsive-ui.svg)
+<img width="252" height="562" alt="image" src="https://github.com/user-attachments/assets/ecab08e1-4f67-4daf-898f-32f2a8cb5060" />
 
 ### 3. CI/CD Pipeline Execution Status
 ![CI Pipeline Status](./public/screenshots/ci-cd-pipeline-running.svg)
