@@ -15,7 +15,7 @@ Designed specifically to move beyond basic beginner demos, this project adheres 
 All contract addresses and transaction hashes below are deployed live on **Stellar Testnet** and exactly match the authoritative identifiers across all source code and configuration files:
 
 - **Live Application (Vercel)**: [https://crowdfunding-mu-peach.vercel.app/](https://crowdfunding-mu-peach.vercel.app/)
-- **Demo Walkthrough Video (1-2 Min)**: [Google Drive Walkthrough Video](https://drive.google.com/file/d/1Me7IvigXKzr0yMh3jrjmmNLFRBWKpMwS/view?usp=sharing)
+- **Demo Walkthrough Video (1-2 Min)**: [Google Drive Walkthrough Video](https://drive.google.com/file/d/1jWVg2jJSakk-EmN0vjP90lQgvyZ5gnDj/view?usp=sharing)
 - **Public GitHub Repository**: [https://github.com/rahuldev8789/Crowdfunding](https://github.com/rahuldev8789/Crowdfunding)
 - **Crowdfunding Smart Contract ID**: `CB6Z2H3NUTBIYY7CUR5PKCF4YROK7SYHVP72GM54FZKJQMQZQZINPXTE`
   - *Explorer Link*: [Explore Crowdfunding Contract on Stellar.Expert](https://stellar.expert/explorer/testnet/contract/CB6Z2H3NUTBIYY7CUR5PKCF4YROK7SYHVP72GM54FZKJQMQZQZINPXTE)
