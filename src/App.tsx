@@ -64,6 +64,33 @@ function App() {
     },
   ]
 
+  const refreshWallets = async () => {
+    try {
+      const wallets = await StellarWalletsKit.refreshSupportedWallets()
+      const mappedWallets = wallets.map((wallet) => ({
+        id: wallet.id,
+        name: wallet.name,
+        type: wallet.type,
+        icon: wallet.icon,
+        url: wallet.url,
+        isAvailable: wallet.isAvailable,
+      }))
+
+      setWalletOptions(mappedWallets)
+      const firstAvailableWallet = mappedWallets.find((wallet) => wallet.isAvailable)
+      setSelectedWallet((currentSelected) => {
+        if (currentSelected && mappedWallets.some((w) => w.id === currentSelected)) {
+          return currentSelected
+        }
+        return firstAvailableWallet?.id ?? mappedWallets[0]?.id ?? ''
+      })
+    } catch (err) {
+      console.debug('[stellar] wallet refresh error', err)
+    } finally {
+      setWalletsReady(true)
+    }
+  }
+
   useEffect(() => {
     StellarWalletsKit.init({
       modules: defaultModules(),
@@ -74,30 +101,19 @@ function App() {
       },
     })
 
-    void StellarWalletsKit.refreshSupportedWallets()
-      .then((wallets) => {
-        const mappedWallets = wallets.map((wallet) => ({
-          id: wallet.id,
-          name: wallet.name,
-          type: wallet.type,
-          icon: wallet.icon,
-          url: wallet.url,
-          isAvailable: wallet.isAvailable,
-        }))
+    void refreshWallets()
 
-        setWalletOptions(mappedWallets)
-        const firstAvailableWallet = mappedWallets.find((wallet) => wallet.isAvailable)
-        setSelectedWallet((currentSelected) => {
-          if (currentSelected && mappedWallets.some((wallet) => wallet.id === currentSelected)) {
-            return currentSelected
-          }
+    const interval = window.setInterval(() => {
+      void refreshWallets()
+    }, 3000)
 
-          return firstAvailableWallet?.id ?? mappedWallets[0]?.id ?? ''
-        })
-      })
-      .finally(() => {
-        setWalletsReady(true)
-      })
+    const handleFocus = () => void refreshWallets()
+    window.addEventListener('focus', handleFocus)
+
+    return () => {
+      window.clearInterval(interval)
+      window.removeEventListener('focus', handleFocus)
+    }
   }, [])
 
   useEffect(() => {
@@ -405,7 +421,25 @@ function App() {
                 <div>
                   <h2>Supported Stellar Wallets</h2>
                 </div>
-                <strong className="wallet-count-badge">{availableWalletCount} ready</strong>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <button
+                    type="button"
+                    onClick={() => void refreshWallets()}
+                    style={{
+                      background: 'rgba(34, 211, 238, 0.15)',
+                      border: '1px solid rgba(34, 211, 238, 0.3)',
+                      color: '#38bdf8',
+                      padding: '4px 10px',
+                      borderRadius: '999px',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    🔄 Check Wallets
+                  </button>
+                  <strong className="wallet-count-badge">{availableWalletCount} ready</strong>
+                </div>
               </div>
 
               <div className="wallet-option-grid">
@@ -419,8 +453,19 @@ function App() {
                       className={`${selectedWallet === wallet.id ? 'wallet-chip active' : 'wallet-chip'}${
                         !wallet.isAvailable ? ' disabled' : ''
                       }`}
-                      onClick={() => setSelectedWallet(wallet.id)}
-                      disabled={!wallet.isAvailable}
+                      onClick={() => {
+                        if (!wallet.isAvailable) {
+                          if (wallet.url) {
+                            window.open(wallet.url, '_blank')
+                          }
+                          markError(
+                            'wallet-not-found',
+                            `Extension installed? You must REFRESH this browser tab (Ctrl+R or F5) and unlock ${wallet.name} before the browser detects it!`,
+                          )
+                        } else {
+                          setSelectedWallet(wallet.id)
+                        }
+                      }}
                     >
                       <div className="wallet-chip-top">
                         <img src={wallet.icon} alt="" aria-hidden="true" />
