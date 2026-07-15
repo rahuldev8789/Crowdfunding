@@ -210,7 +210,7 @@ Every push and pull request against the `main` branch automatically triggers the
 | **Screenshot: Mobile Responsive UI** | ✅ **Covered** | Embedded directly below (`public/screenshots/mobile-responsive-ui.svg`) |
 | **Screenshot: CI/CD Pipeline Running** | ✅ **Covered** | Embedded directly below (`public/screenshots/ci-cd-pipeline-running.svg`) |
 | **Screenshot: Test Output (3+ Passing)** | ✅ **Covered** | Embedded directly below (`public/screenshots/test-output.svg` - shows 5 contract tests + 4 frontend tests) |
-| **Demo Walkthrough Video (1–2 Min)** | ✅ **Covered** | [Google Drive Walkthrough Video Link](https://drive.google.com/file/d/1Me7IvigXKzr0yMh3jrjmmNLFRBWKpMwS/view?usp=sharing) |
+| **Demo Walkthrough Video (1–2 Min)** | ✅ **Covered** | [Google Drive Walkthrough Video Link](https://drive.google.com/file/d/1jWVg2jJSakk-EmN0vjP90lQgvyZ5gnDj/view?usp=sharing) |
 
 ---
 
