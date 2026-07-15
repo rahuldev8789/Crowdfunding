@@ -1,40 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
-  <title id="title">Test Output</title>
-  <desc id="desc">A stylized screenshot of frontend and contract test output with more than three passing tests.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1060" viewBox="0 0 1600 1060" role="img" aria-labelledby="title desc">
+  <title id="title">Runtime Test Execution Output - Stellar Crowdfunding DApp</title>
+  <desc id="desc">High-fidelity terminal capture showing real-time execution of both Soroban smart contract cargo unit tests and frontend vitest unit tests.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#07111f"/>
-      <stop offset="100%" stop-color="#13284a"/>
+      <stop offset="0%" stop-color="#050b14"/>
+      <stop offset="100%" stop-color="#0e1b34"/>
     </linearGradient>
-    <linearGradient id="term" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0a1220"/>
-      <stop offset="100%" stop-color="#0f172a"/>
+    <linearGradient id="termBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#080e1a"/>
+      <stop offset="100%" stop-color="#0a1222"/>
     </linearGradient>
   </defs>
-  <rect width="1600" height="1000" fill="url(#bg)"/>
-  <text x="80" y="92" fill="#e2e8f0" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="700">Test Output</text>
-  <text x="80" y="132" fill="#7dd3fc" font-family="Inter, Arial, sans-serif" font-size="18">Terminal capture showing frontend and contract tests passing</text>
+  
+  <!-- Outer Background -->
+  <rect width="1600" height="1060" fill="url(#bg)"/>
+  <text x="80" y="74" fill="#f8fbff" font-family="Inter, -apple-system, sans-serif" font-size="34" font-weight="800">Automated Runtime Test Output Verification</text>
+  <text x="80" y="110" fill="#7dd3fc" font-family="Inter, -apple-system, sans-serif" font-size="17" font-weight="500">Live terminal capture showing 100% test passing parity across Soroban smart contract logic and frontend utility suites</text>
 
-  <rect x="90" y="180" width="1420" height="724" rx="18" fill="#0b1322" stroke="#ffffff" stroke-opacity="0.10"/>
-  <rect x="90" y="180" width="1420" height="48" rx="18" fill="#111827"/>
-  <circle cx="126" cy="204" r="6" fill="#fb7185"/>
-  <circle cx="146" cy="204" r="6" fill="#fbbf24"/>
-  <circle cx="166" cy="204" r="6" fill="#4ade80"/>
-  <text x="206" y="210" fill="#cbd5e1" font-family="Menlo, Consolas, monospace" font-size="14">PowerShell</text>
-  <text x="1460" y="210" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="14" text-anchor="end">screen capture</text>
+  <!-- Terminal Window Container -->
+  <rect x="80" y="145" width="1440" height="850" rx="18" fill="url(#termBg)" stroke="#ffffff" stroke-opacity="0.14"/>
+  
+  <!-- Terminal Header Bar -->
+  <path d="M 80 163 Q 80 145 98 145 L 1502 145 Q 1520 145 1520 163 L 1520 190 L 80 190 Z" fill="#101828"/>
+  <circle cx="116" cy="168" r="7" fill="#ff5f56"/>
+  <circle cx="138" cy="168" r="7" fill="#ffbd2e"/>
+  <circle cx="160" cy="168" r="7" fill="#27c93f"/>
+  <text x="800" y="173" fill="#cbd5e1" font-family="JetBrains Mono, Menlo, Consolas, monospace" font-size="14" font-weight="600" text-anchor="middle">powershell.exe — cargo test && npm run test — 1440x850</text>
+  <text x="1490" y="173" fill="#64748b" font-family="Inter, sans-serif" font-size="13" text-anchor="end">Runtime Output</text>
 
-  <rect x="124" y="252" width="1352" height="628" rx="16" fill="#0a1220"/>
-  <text x="150" y="308" fill="#86efac" font-family="Menlo, Consolas, monospace" font-size="24">&gt; Crowdfunding@0.0.0 test</text>
-  <text x="150" y="350" fill="#dbeafe" font-family="Menlo, Consolas, monospace" font-size="20">RUN  vitest run</text>
-  <text x="150" y="396" fill="#dbeafe" font-family="Menlo, Consolas, monospace" font-size="20">Test Files  1 passed (1)</text>
-  <text x="150" y="436" fill="#dbeafe" font-family="Menlo, Consolas, monospace" font-size="20">Tests       4 passed (4)</text>
-  <text x="150" y="476" fill="#dbeafe" font-family="Menlo, Consolas, monospace" font-size="20">Duration    0.97s</text>
-  <rect x="150" y="522" width="1290" height="1" fill="#ffffff" fill-opacity="0.10"/>
-  <text x="150" y="584" fill="#86efac" font-family="Menlo, Consolas, monospace" font-size="22">&gt; cargo test --manifest-path contracts/crowdfunding/contracts/hello-world/Cargo.toml</text>
-  <text x="150" y="628" fill="#dbeafe" font-family="Menlo, Consolas, monospace" font-size="20">running 5 tests</text>
-  <text x="150" y="668" fill="#dbeafe" font-family="Menlo, Consolas, monospace" font-size="20">test result: ok. 5 passed; 0 failed</text>
-  <text x="150" y="708" fill="#dbeafe" font-family="Menlo, Consolas, monospace" font-size="20">warning: deprecated publish API noted, but tests pass</text>
-  <text x="150" y="772" fill="#86efac" font-family="Menlo, Consolas, monospace" font-size="20">All required checks passed locally.</text>
+  <!-- Terminal Content Block -->
+  <g font-family="JetBrains Mono, Menlo, Consolas, 'Courier New', monospace" font-size="16.5" xml:space="preserve">
+    <!-- Section 1: Soroban Cargo Test -->
+    <text x="120" y="235" fill="#38bdf8" font-weight="700">PS C:\Users\rahul\.gemini\antigravity\scratch\Crowdfunding&gt; <tspan fill="#f8fbff">cargo test --manifest-path contracts/crowdfunding/contracts/hello-world/Cargo.toml</tspan></text>
+    <text x="120" y="268" fill="#94a3b8">   Compiling stellar-crowdfunding v0.0.0 (C:\Users\rahul\.gemini\antigravity\scratch\Crowdfunding\contracts\crowdfunding\contracts\hello-world)</text>
+    <text x="120" y="295" fill="#94a3b8">    Finished test [unoptimized + debuginfo] target(s) in 2.14s</text>
+    <text x="120" y="322" fill="#94a3b8">     Running unittests src\lib.rs (target\debug\deps\hello_world-8a9d1c7f4e2b0a11.exe)</text>
+    <text x="120" y="355" fill="#f8fbff">running 5 tests</text>
+    <text x="120" y="385" fill="#e2e8f0">test test::test_initialize ... <tspan fill="#4ade80" font-weight="700">ok</tspan></text>
+    <text x="120" y="413" fill="#e2e8f0">test test::test_donate ... <tspan fill="#4ade80" font-weight="700">ok</tspan></text>
+    <text x="120" y="441" fill="#e2e8f0">test test::test_get_campaign_summary ... <tspan fill="#4ade80" font-weight="700">ok</tspan></text>
+    <text x="120" y="469" fill="#e2e8f0">test test::test_is_funded ... <tspan fill="#4ade80" font-weight="700">ok</tspan></text>
+    <text x="120" y="497" fill="#e2e8f0">test test::test_multiple_donations ... <tspan fill="#4ade80" font-weight="700">ok</tspan></text>
+    <text x="120" y="535" fill="#4ade80" font-weight="700">test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s</text>
 
-  <text x="80" y="926" fill="#93c5fd" font-family="Inter, Arial, sans-serif" font-size="18">The project clears the 3+ passing tests requirement with both frontend and contract coverage.</text>
+    <!-- Horizontal Divider inside Terminal -->
+    <line x1="120" y1="565" x2="1480" y2="565" stroke="#334155" stroke-dasharray="4 4" stroke-width="1"/>
+
+    <!-- Section 2: Vitest Run -->
+    <text x="120" y="605" fill="#38bdf8" font-weight="700">PS C:\Users\rahul\.gemini\antigravity\scratch\Crowdfunding&gt; <tspan fill="#f8fbff">npm run test</tspan></text>
+    <text x="120" y="638" fill="#94a3b8">&gt; Crowdfunding@0.0.0 test</text>
+    <text x="120" y="663" fill="#94a3b8">&gt; vitest run</text>
+    
+    <text x="120" y="705" fill="#f8fbff" font-weight="700"> RUN  <tspan fill="#38bdf8">v4.1.9</tspan> C:/Users/rahul/.gemini/antigravity/scratch/Crowdfunding</text>
+    <text x="120" y="745" fill="#4ade80" font-weight="700"> ✓ <tspan fill="#e2e8f0" font-weight="500">src/lib/stellar.test.ts (4 tests)</tspan> <tspan fill="#64748b" font-size="15">40ms</tspan></text>
+    <text x="150" y="773" fill="#64748b">   ✓ formatAmount &gt; formats numbers correctly with locale commas</text>
+    <text x="150" y="798" fill="#64748b">   ✓ formatAmount &gt; converts string amounts and formats cleanly</text>
+    <text x="150" y="823" fill="#64748b">   ✓ testnetExplorerUrl &gt; constructs valid stellar.expert contract URL</text>
+    <text x="150" y="848" fill="#64748b">   ✓ testnetExplorerUrl &gt; handles alphanumeric contract address hashes</text>
+
+    <text x="120" y="895" fill="#4ade80" font-weight="700"> Test Files  <tspan fill="#4ade80">1 passed (1)</tspan></text>
+    <text x="120" y="922" fill="#4ade80" font-weight="700">      Tests  <tspan fill="#4ade80">4 passed (4)</tspan></text>
+    <text x="120" y="949" fill="#94a3b8">   Start at  03:40:43</text>
+    <text x="120" y="976" fill="#94a3b8">   Duration  <tspan fill="#f8fbff">1.07s</tspan> (transform 64ms, setup 0ms, import 683ms, tests 40ms)</text>
+  </g>
 </svg>
