@@ -230,6 +230,83 @@ export const fetchCampaignStatus = async (sourceAccount?: string): Promise<strin
   return 'Active'
 }
 
+export const fetchRewardBadgeBalance = async (donorAddress: string, rewardContractId: string, sourceAccount?: string): Promise<number> => {
+  try {
+    const dummyAccount = new Account(sourceAccount || 'GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWHF', '1')
+    const tx = new TransactionBuilder(dummyAccount, { fee: '100', networkPassphrase: TESTNET_NETWORK_PASSPHRASE })
+      .addOperation(
+        Operation.invokeContractFunction({
+          contract: rewardContractId,
+          function: 'balance_of',
+          args: [nativeToScVal(donorAddress, { type: 'string' })],
+        }),
+      )
+      .setTimeout(30)
+      .build()
+    const sim = await rpcServer.simulateTransaction(tx)
+    if (rpc.Api.isSimulationSuccess(sim) && sim.result?.retval) {
+      return Number(scValToNative(sim.result.retval))
+    }
+  } catch (e) {
+    console.debug('[stellar:fetchRewardBadgeBalance] simulation failed', e)
+  }
+  return 0
+}
+
+export const fetchContractEvents = async (limit = 10) => {
+  try {
+    const latestLedger = await rpcServer.getLatestLedger()
+    const startLedger = Math.max(1, latestLedger.sequence - 1000)
+    const response = await rpcServer.getEvents({
+      startLedger,
+      filters: [
+        {
+          type: 'contract',
+          contractIds: [CONTRACT_ID],
+        },
+      ],
+      limit,
+    })
+    if (response && response.events) {
+      return response.events.map((evt: any, index: number) => {
+        let topicName = 'ContractEvent'
+        let donor = ''
+        let amount = 0
+        try {
+          if (evt.topic && evt.topic.length > 0) {
+            topicName = scValToNative(evt.topic[0]) || 'ContractEvent'
+          }
+          if (evt.topic && evt.topic.length > 1) {
+            donor = String(scValToNative(evt.topic[1]) || '')
+          }
+          if (evt.value) {
+            const valObj = scValToNative(evt.value) as any
+            if (typeof valObj === 'number' || typeof valObj === 'bigint') {
+              amount = Number(valObj)
+            } else if (valObj && typeof valObj.amount !== 'undefined') {
+              amount = Number(valObj.amount)
+            }
+          }
+        } catch {
+          // fallback if scVal decoding encounters custom structs
+        }
+        return {
+          id: `${evt.ledger || 'sim'}-${index}`,
+          kind: topicName as any,
+          donor: donor || `${CONTRACT_ID.slice(0, 6)}...`,
+          amount,
+          status: 'success' as const,
+          ledger: evt.ledger || latestLedger.sequence,
+          timestamp: new Date().toLocaleTimeString(),
+        }
+      })
+    }
+  } catch (e) {
+    console.debug('[stellar:fetchContractEvents] RPC event streaming fallback', e)
+  }
+  return []
+}
+
 export const getContractSnapshot = async () => {
   // Execute function-matching invocations first to satisfy complete matching checks
   const [goal, raised, owner, isFunded, summary] = await Promise.all([
