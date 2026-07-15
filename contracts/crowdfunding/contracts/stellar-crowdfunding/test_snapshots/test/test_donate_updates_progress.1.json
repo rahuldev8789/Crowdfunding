@@ -11,8 +11,6 @@
     [],
     [],
     [],
-    [],
-    [],
     []
   ],
   "ledger": {
@@ -33,11 +31,11 @@
               "ext": "v0",
               "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
               "key": {
-                "symbol": "dcnt"
+                "symbol": "donor"
               },
               "durability": "persistent",
               "val": {
-                "u32": 2
+                "u32": 0
               }
             }
           },
@@ -57,7 +55,7 @@
               },
               "durability": "persistent",
               "val": {
-                "bool": true
+                "bool": false
               }
             }
           },
@@ -77,27 +75,7 @@
               },
               "durability": "persistent",
               "val": {
-                "i128": "1000"
-              }
-            }
-          },
-          "ext": "v0"
-        },
-        "live_until": 4095
-      },
-      {
-        "entry": {
-          "last_modified_ledger_seq": 0,
-          "data": {
-            "contract_data": {
-              "ext": "v0",
-              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
-              "key": {
-                "symbol": "mindon"
-              },
-              "durability": "persistent",
-              "val": {
-                "i128": "10"
+                "i128": "25000"
               }
             }
           },
@@ -137,7 +115,7 @@
               },
               "durability": "persistent",
               "val": {
-                "i128": "1000"
+                "i128": "150"
               }
             }
           },
@@ -164,84 +142,7 @@
               },
               "durability": "persistent",
               "val": {
-                "map": [
-                  {
-                    "key": {
-                      "symbol": "contributions_count"
-                    },
-                    "val": {
-                      "u32": 1
-                    }
-                  },
-                  {
-                    "key": {
-                      "symbol": "last_contribution"
-                    },
-                    "val": {
-                      "i128": "700"
-                    }
-                  },
-                  {
-                    "key": {
-                      "symbol": "total_contributed"
-                    },
-                    "val": {
-                      "i128": "700"
-                    }
-                  }
-                ]
-              }
-            }
-          },
-          "ext": "v0"
-        },
-        "live_until": 4095
-      },
-      {
-        "entry": {
-          "last_modified_ledger_seq": 0,
-          "data": {
-            "contract_data": {
-              "ext": "v0",
-              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
-              "key": {
-                "vec": [
-                  {
-                    "symbol": "donor"
-                  },
-                  {
-                    "string": "bob"
-                  }
-                ]
-              },
-              "durability": "persistent",
-              "val": {
-                "map": [
-                  {
-                    "key": {
-                      "symbol": "contributions_count"
-                    },
-                    "val": {
-                      "u32": 1
-                    }
-                  },
-                  {
-                    "key": {
-                      "symbol": "last_contribution"
-                    },
-                    "val": {
-                      "i128": "300"
-                    }
-                  },
-                  {
-                    "key": {
-                      "symbol": "total_contributed"
-                    },
-                    "val": {
-                      "i128": "300"
-                    }
-                  }
-                ]
+                "i128": "150"
               }
             }
           },
@@ -291,34 +192,7 @@
               },
               "durability": "persistent",
               "val": {
-                "i128": "700"
-              }
-            }
-          },
-          "ext": "v0"
-        },
-        "live_until": 4095
-      },
-      {
-        "entry": {
-          "last_modified_ledger_seq": 0,
-          "data": {
-            "contract_data": {
-              "ext": "v0",
-              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFCT4",
-              "key": {
-                "vec": [
-                  {
-                    "symbol": "balance"
-                  },
-                  {
-                    "string": "bob"
-                  }
-                ]
-              },
-              "durability": "persistent",
-              "val": {
-                "i128": "300"
+                "i128": "150"
               }
             }
           },

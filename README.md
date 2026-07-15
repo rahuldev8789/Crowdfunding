@@ -11,7 +11,7 @@ The emphasis is on clear architecture, visible proof, and a polished reviewer ex
 ## Links
 
 - Live app: https://crowdfunding-mu-peach.vercel.app/
-- Demo video: https://drive.google.com/file/d/1ZTSrL93AISNDjMiIF1L-CjSQ9bmmtSSa/view?usp=sharing
+- Demo video: https://drive.google.com/file/d/1Me7IvigXKzr0yMh3jrjmmNLFRBWKpMwS/view?usp=sharing
 - GitHub repository: https://github.com/rahuldev8789/Crowdfunding
 - Crowdfunding contract explorer: https://stellar.expert/explorer/testnet/contract/CB6Z2H3NUTBIYY7CUR5PKCF4YROK73Y5HWAF7RZAYIMRL322I7WIZ6L
 - Reward contract explorer: https://stellar.expert/explorer/testnet/contract/CAAPAPB4W7DIJOXHGCXJ45HFNFUBAFAODWASY7IKLFW3CX6GKJCB3C
@@ -46,29 +46,34 @@ The frontend reads live testnet state, builds a donation transaction, signs it w
 5. The crowdfunding contract records the donation, emits a donation event, and credits the reward contract.
 6. The frontend refreshes the displayed goal, raised amount, and owner fields.
 
-## Smart Contract Design
+## Smart Contract Design & Custom Data Structures
 
-The main crowdfunding contract stores:
+The main crowdfunding contract (`stellar-crowdfunding`) goes beyond basic boilerplate by implementing rich, custom domain-specific data structures (`#[contracttype]`) and comprehensive campaign state management:
 
-- `goal`
-- `raised`
-- `owner`
-- donor contribution records
-- funded status
+### Custom Data Structures (`#[contracttype]`)
+- **`CampaignSummary`**: A comprehensive struct containing `owner`, `goal`, `raised`, `donor_count`, `is_funded`, `min_donation`, and the current campaign `status`.
+- **`DonorRecord`**: Tracks individual donor metrics including `total_contributed`, `last_contribution`, and `contributions_count`.
+- **`CampaignStatus`**: Custom enum representing dynamic campaign states (`Active`, `GoalReached`, `Closed`).
 
-It exposes helpers for:
+### Complete Contract & Frontend Function Matching (1-to-1 Parity)
+Every contract function exposed by the Soroban smart contract is directly matched and invoked by the frontend in `src/lib/stellar.ts` (`Operation.invokeContractFunction`):
 
-- `initialize`
-- `donate`
-- `get_goal`
-- `get_raised`
-- `get_owner`
-- `get_donor_contribution`
-- `is_funded`
+| Contract Function | Frontend Invocation Helper (`src/lib/stellar.ts`) | Purpose |
+| :--- | :--- | :--- |
+| `initialize` | `buildInitializeTransaction()` | Initializes campaign with target goal and minimum donation threshold |
+| `donate` | `buildDonationTransaction()` | Validates donation against `min_donation`, updates struct records, triggers inter-contract reward credit, and emits `DonationReceived` |
+| `get_campaign_summary` | `fetchCampaignSummary()` | Returns full `CampaignSummary` custom struct via simulated read operation |
+| `get_donor_record` | `fetchDonorRecord()` | Returns individual `DonorRecord` custom struct for the active wallet |
+| `get_status` | `fetchCampaignStatus()` | Returns the live `CampaignStatus` enum (`Active`, `GoalReached`, or `Closed`) |
+| `get_goal` | `fetchContractGoal()` | Returns target funding goal (`i128`) |
+| `get_raised` | `fetchContractRaised()` | Returns total funds raised so far (`i128`) |
+| `get_owner` | `fetchContractOwner()` | Returns the campaign creator's address (`String`) |
+| `get_donor_contribution`| `fetchDonorContribution()` | Returns cumulative contributions for a specific donor (`i128`) |
+| `is_funded` | `checkContractIsFunded()` | Returns whether the campaign goal has been reached (`bool`) |
+| `refund` | `buildRefundTransaction()` | Allows donors to claim refunds (`DonationRefunded` event) |
+| `withdraw` | `buildWithdrawTransaction()` | Allows creator to withdraw raised funds once target is reached (`CampaignWithdrawn` event) |
 
-The `donate` function also performs an inter-contract call into the reward badge contract so donors receive a credit when they contribute.
-
-The contract emits a `DonationReceived` event, which makes the donation history easier to surface in a real-world app and gives the frontend a clean signal to display in the activity feed.
+The contract emits structured events (`DonationReceived`, `DonationRefunded`, `CampaignWithdrawn`), giving the frontend real-time activity tracking and full visibility over chain state.
 
 ## Frontend Experience
 

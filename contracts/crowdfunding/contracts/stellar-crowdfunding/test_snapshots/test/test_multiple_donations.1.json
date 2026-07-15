@@ -33,11 +33,11 @@
               "ext": "v0",
               "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
               "key": {
-                "symbol": "dcnt"
+                "symbol": "donor"
               },
               "durability": "persistent",
               "val": {
-                "u32": 2
+                "u32": 0
               }
             }
           },
@@ -57,7 +57,7 @@
               },
               "durability": "persistent",
               "val": {
-                "bool": true
+                "bool": false
               }
             }
           },
@@ -77,27 +77,7 @@
               },
               "durability": "persistent",
               "val": {
-                "i128": "1000"
-              }
-            }
-          },
-          "ext": "v0"
-        },
-        "live_until": 4095
-      },
-      {
-        "entry": {
-          "last_modified_ledger_seq": 0,
-          "data": {
-            "contract_data": {
-              "ext": "v0",
-              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
-              "key": {
-                "symbol": "mindon"
-              },
-              "durability": "persistent",
-              "val": {
-                "i128": "10"
+                "i128": "10000"
               }
             }
           },
@@ -137,7 +117,7 @@
               },
               "durability": "persistent",
               "val": {
-                "i128": "1000"
+                "i128": "2050"
               }
             }
           },
@@ -158,38 +138,13 @@
                     "symbol": "donor"
                   },
                   {
-                    "string": "alice"
+                    "string": "donor_1"
                   }
                 ]
               },
               "durability": "persistent",
               "val": {
-                "map": [
-                  {
-                    "key": {
-                      "symbol": "contributions_count"
-                    },
-                    "val": {
-                      "u32": 1
-                    }
-                  },
-                  {
-                    "key": {
-                      "symbol": "last_contribution"
-                    },
-                    "val": {
-                      "i128": "700"
-                    }
-                  },
-                  {
-                    "key": {
-                      "symbol": "total_contributed"
-                    },
-                    "val": {
-                      "i128": "700"
-                    }
-                  }
-                ]
+                "i128": "500"
               }
             }
           },
@@ -210,38 +165,40 @@
                     "symbol": "donor"
                   },
                   {
-                    "string": "bob"
+                    "string": "donor_2"
                   }
                 ]
               },
               "durability": "persistent",
               "val": {
-                "map": [
+                "i128": "1250"
+              }
+            }
+          },
+          "ext": "v0"
+        },
+        "live_until": 4095
+      },
+      {
+        "entry": {
+          "last_modified_ledger_seq": 0,
+          "data": {
+            "contract_data": {
+              "ext": "v0",
+              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
+              "key": {
+                "vec": [
                   {
-                    "key": {
-                      "symbol": "contributions_count"
-                    },
-                    "val": {
-                      "u32": 1
-                    }
+                    "symbol": "donor"
                   },
                   {
-                    "key": {
-                      "symbol": "last_contribution"
-                    },
-                    "val": {
-                      "i128": "300"
-                    }
-                  },
-                  {
-                    "key": {
-                      "symbol": "total_contributed"
-                    },
-                    "val": {
-                      "i128": "300"
-                    }
+                    "string": "donor_3"
                   }
                 ]
+              },
+              "durability": "persistent",
+              "val": {
+                "i128": "300"
               }
             }
           },
@@ -285,13 +242,13 @@
                     "symbol": "balance"
                   },
                   {
-                    "string": "alice"
+                    "string": "donor_1"
                   }
                 ]
               },
               "durability": "persistent",
               "val": {
-                "i128": "700"
+                "i128": "500"
               }
             }
           },
@@ -312,7 +269,34 @@
                     "symbol": "balance"
                   },
                   {
-                    "string": "bob"
+                    "string": "donor_2"
+                  }
+                ]
+              },
+              "durability": "persistent",
+              "val": {
+                "i128": "1250"
+              }
+            }
+          },
+          "ext": "v0"
+        },
+        "live_until": 4095
+      },
+      {
+        "entry": {
+          "last_modified_ledger_seq": 0,
+          "data": {
+            "contract_data": {
+              "ext": "v0",
+              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFCT4",
+              "key": {
+                "vec": [
+                  {
+                    "symbol": "balance"
+                  },
+                  {
+                    "string": "donor_3"
                   }
                 ]
               },

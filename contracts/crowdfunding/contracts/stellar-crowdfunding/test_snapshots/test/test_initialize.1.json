@@ -1,12 +1,10 @@
 {
   "generators": {
-    "address": 2,
+    "address": 1,
     "nonce": 0,
     "mux_id": 0
   },
   "auth": [
-    [],
-    [],
     [],
     [],
     [],
@@ -32,11 +30,11 @@
               "ext": "v0",
               "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
               "key": {
-                "symbol": "dcnt"
+                "symbol": "donor"
               },
               "durability": "persistent",
               "val": {
-                "u32": 1
+                "u32": 0
               }
             }
           },
@@ -76,27 +74,7 @@
               },
               "durability": "persistent",
               "val": {
-                "i128": "25000"
-              }
-            }
-          },
-          "ext": "v0"
-        },
-        "live_until": 4095
-      },
-      {
-        "entry": {
-          "last_modified_ledger_seq": 0,
-          "data": {
-            "contract_data": {
-              "ext": "v0",
-              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
-              "key": {
-                "symbol": "mindon"
-              },
-              "durability": "persistent",
-              "val": {
-                "i128": "5"
+                "i128": "50000"
               }
             }
           },
@@ -116,7 +94,7 @@
               },
               "durability": "persistent",
               "val": {
-                "string": "creator"
+                "string": "creator_alice"
               }
             }
           },
@@ -136,7 +114,7 @@
               },
               "durability": "persistent",
               "val": {
-                "i128": "150"
+                "i128": "0"
               }
             }
           },
@@ -151,108 +129,6 @@
             "contract_data": {
               "ext": "v0",
               "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
-              "key": {
-                "vec": [
-                  {
-                    "symbol": "donor"
-                  },
-                  {
-                    "string": "alice"
-                  }
-                ]
-              },
-              "durability": "persistent",
-              "val": {
-                "map": [
-                  {
-                    "key": {
-                      "symbol": "contributions_count"
-                    },
-                    "val": {
-                      "u32": 1
-                    }
-                  },
-                  {
-                    "key": {
-                      "symbol": "last_contribution"
-                    },
-                    "val": {
-                      "i128": "150"
-                    }
-                  },
-                  {
-                    "key": {
-                      "symbol": "total_contributed"
-                    },
-                    "val": {
-                      "i128": "150"
-                    }
-                  }
-                ]
-              }
-            }
-          },
-          "ext": "v0"
-        },
-        "live_until": 4095
-      },
-      {
-        "entry": {
-          "last_modified_ledger_seq": 0,
-          "data": {
-            "contract_data": {
-              "ext": "v0",
-              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
-              "key": "ledger_key_contract_instance",
-              "durability": "persistent",
-              "val": {
-                "contract_instance": {
-                  "executable": {
-                    "wasm": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-                  },
-                  "storage": null
-                }
-              }
-            }
-          },
-          "ext": "v0"
-        },
-        "live_until": 4095
-      },
-      {
-        "entry": {
-          "last_modified_ledger_seq": 0,
-          "data": {
-            "contract_data": {
-              "ext": "v0",
-              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFCT4",
-              "key": {
-                "vec": [
-                  {
-                    "symbol": "balance"
-                  },
-                  {
-                    "string": "alice"
-                  }
-                ]
-              },
-              "durability": "persistent",
-              "val": {
-                "i128": "150"
-              }
-            }
-          },
-          "ext": "v0"
-        },
-        "live_until": 4095
-      },
-      {
-        "entry": {
-          "last_modified_ledger_seq": 0,
-          "data": {
-            "contract_data": {
-              "ext": "v0",
-              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFCT4",
               "key": "ledger_key_contract_instance",
               "durability": "persistent",
               "val": {

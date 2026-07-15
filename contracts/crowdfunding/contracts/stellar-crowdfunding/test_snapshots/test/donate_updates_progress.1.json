@@ -8,9 +8,6 @@
     [],
     [],
     [],
-    [],
-    [],
-    [],
     []
   ],
   "ledger": {
@@ -31,31 +28,11 @@
               "ext": "v0",
               "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
               "key": {
-                "symbol": "dcnt"
+                "string": "owner"
               },
               "durability": "persistent",
               "val": {
-                "u32": 0
-              }
-            }
-          },
-          "ext": "v0"
-        },
-        "live_until": 4095
-      },
-      {
-        "entry": {
-          "last_modified_ledger_seq": 0,
-          "data": {
-            "contract_data": {
-              "ext": "v0",
-              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
-              "key": {
-                "symbol": "funded"
-              },
-              "durability": "persistent",
-              "val": {
-                "bool": false
+                "string": "creator"
               }
             }
           },
@@ -75,27 +52,7 @@
               },
               "durability": "persistent",
               "val": {
-                "i128": "50000"
-              }
-            }
-          },
-          "ext": "v0"
-        },
-        "live_until": 4095
-      },
-      {
-        "entry": {
-          "last_modified_ledger_seq": 0,
-          "data": {
-            "contract_data": {
-              "ext": "v0",
-              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
-              "key": {
-                "symbol": "mindon"
-              },
-              "durability": "persistent",
-              "val": {
-                "i128": "10"
+                "i128": "25000"
               }
             }
           },
@@ -115,7 +72,7 @@
               },
               "durability": "persistent",
               "val": {
-                "string": "creator_alice"
+                "string": "creator"
               }
             }
           },
@@ -135,7 +92,7 @@
               },
               "durability": "persistent",
               "val": {
-                "i128": "0"
+                "i128": "150"
               }
             }
           },

@@ -1,7 +1,12 @@
 export type TransactionStatus = 'idle' | 'pending' | 'success' | 'error'
 export type SyncStatus = 'idle' | 'pending' | 'success' | 'error'
 
-export type WalletErrorCode = 'wallet-not-found' | 'wallet-unavailable' | 'user-rejected' | 'insufficient-balance'
+export type WalletErrorCode =
+  | 'wallet-not-found'
+  | 'wallet-unavailable'
+  | 'contract-address-invalid'
+  | 'user-rejected'
+  | 'insufficient-balance'
 
 export interface WalletErrorInfo {
   code: WalletErrorCode
@@ -10,8 +15,11 @@ export interface WalletErrorInfo {
 
 export interface WalletOption {
   id: string
-  label: string
-  note: string
+  name: string
+  type: string
+  icon: string
+  url: string
+  isAvailable: boolean
 }
 
 export interface DonationEvent {
