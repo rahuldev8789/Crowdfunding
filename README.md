@@ -213,7 +213,7 @@ Every push and pull request against the `main` branch automatically triggers the
 | **Transaction Hash for Interaction** | ✅ **Covered** | Deployment Tx: `9503aa0e2b59487be3e66cdb51ec22c8ee8f3771fc17359115437d9f2c33aa9b`<br>Creation Tx: `6e81e554427cf1b7ef716b711dc60d98bb88a7e847054867ccc020268142e37e` |
 | **Screenshot: Mobile Responsive UI** | ✅ **Covered** | Embedded directly below (`public/screenshots/mobile-responsive-ui.svg`) |
 | **Screenshot: CI/CD Pipeline Running** | ✅ **Covered** | Embedded directly below (`public/screenshots/ci-cd-pipeline-running.svg`) |
-| **Screenshot: Test Output (3+ Passing)** | ✅ **Covered** | Embedded directly below (`public/screenshots/test-output.svg` - shows 5 contract tests + 4 frontend tests) |
+| **Screenshot: Test Output (3+ Passing)** | ✅ **Covered** | Embedded directly below (`public/screenshots/test-output.svg` - shows 13 Soroban tests across workspace + 4 frontend tests) |
 | **Demo Walkthrough Video (1–2 Min)** | ✅ **Covered** | [Google Drive Walkthrough Video Link](https://drive.google.com/file/d/1jWVg2jJSakk-EmN0vjP90lQgvyZ5gnDj/view?usp=sharing) |
 
 ---
