@@ -11,6 +11,7 @@
     [],
     [],
     [],
+    [],
     []
   ],
   "ledger": {
@@ -31,11 +32,11 @@
               "ext": "v0",
               "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
               "key": {
-                "symbol": "donor"
+                "symbol": "dcnt"
               },
               "durability": "persistent",
               "val": {
-                "u32": 0
+                "u32": 1
               }
             }
           },
@@ -76,6 +77,26 @@
               "durability": "persistent",
               "val": {
                 "i128": "25000"
+              }
+            }
+          },
+          "ext": "v0"
+        },
+        "live_until": 4095
+      },
+      {
+        "entry": {
+          "last_modified_ledger_seq": 0,
+          "data": {
+            "contract_data": {
+              "ext": "v0",
+              "contract": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM",
+              "key": {
+                "symbol": "mindon"
+              },
+              "durability": "persistent",
+              "val": {
+                "i128": "5"
               }
             }
           },
@@ -142,7 +163,32 @@
               },
               "durability": "persistent",
               "val": {
-                "i128": "150"
+                "map": [
+                  {
+                    "key": {
+                      "symbol": "contributions_count"
+                    },
+                    "val": {
+                      "u32": 1
+                    }
+                  },
+                  {
+                    "key": {
+                      "symbol": "last_contribution"
+                    },
+                    "val": {
+                      "i128": "150"
+                    }
+                  },
+                  {
+                    "key": {
+                      "symbol": "total_contributed"
+                    },
+                    "val": {
+                      "i128": "150"
+                    }
+                  }
+                ]
               }
             }
           },

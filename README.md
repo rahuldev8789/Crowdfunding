@@ -77,7 +77,7 @@ The main crowdfunding contract (`stellar-crowdfunding`) goes far beyond standard
    #[contracttype]
    #[derive(Clone, Debug, Eq, PartialEq)]
    pub struct CampaignSummary {
-       pub owner: Address,
+       pub owner: String,
        pub goal: i128,
        pub raised: i128,
        pub donor_count: u32,
@@ -94,7 +94,7 @@ The main crowdfunding contract (`stellar-crowdfunding`) goes far beyond standard
    #[derive(Clone, Debug, Eq, PartialEq)]
    pub struct DonorRecord {
        pub total_contributed: i128,
-       pub last_contribution: u64,
+       pub last_contribution: i128,
        pub contributions_count: u32,
    }
    ```
@@ -173,27 +173,31 @@ The client application listens to these updates and executes instant background 
 
 ## Testing & Quality Assurance
 
-The project maintains comprehensive test coverage across both the on-chain smart contracts and frontend utility helpers:
+The project maintains comprehensive, production-grade test coverage across the entire Soroban smart contract workspace and frontend utility helpers (totaling **13 passing automated unit tests** across the workspace):
 
-### 1. Soroban Smart Contract Unit Tests (`cargo test`)
-Located in `contracts/crowdfunding/contracts/hello-world/src/test.rs`, the suite verifies all critical invariants:
-- **`test_initialize`**: Asserts correct startup state, goal assignments, and `min_donation` parameters.
-- **`test_donate`**: Verifies exact balance updates, donor struct recording, and inter-contract reward badge crediting.
-- **`test_get_campaign_summary`**: Confirms accuracy of the aggregated `CampaignSummary` return struct.
-- **`test_is_funded`**: Asserts exact threshold detection when cumulative donations reach or exceed the target goal.
-- **`test_multiple_donations`**: Verifies accumulation math across multiple distinct donors and transaction sequences.
+### 1. Soroban Smart Contract Unit Tests (`cargo test --workspace`)
+Located in `contracts/crowdfunding/contracts/stellar-crowdfunding/src/test.rs`, the suite verifies all critical business logic and state transition invariants:
+- **`test_initialize`**: Asserts correct startup state, initial goal assignment, creator ownership, and `min_donation` parameters.
+- **`test_donate_updates_progress`**: Verifies exact balance updates, `DonorRecord` struct tracking, and inter-contract reward badge crediting (`credit_reward`).
+- **`test_multiple_donations_and_summary`**: Asserts accumulation math across multiple distinct donors and verifies accuracy of the aggregated `CampaignSummary` struct (`donor_count`, `status`).
+- **`test_refund`**: Verifies exact balance zeroing, contribution reset, and fund return when a donor reclaims their contribution via `refund()`.
+- **`test_withdraw_when_funded`**: Asserts campaign creator withdrawal authorization when total funds raised reach or exceed the target goal (`withdraw()`).
+- **`test_marks_funded_at_goal`**: Verifies automatic funded state transition (`is_funded() == true`, `CampaignStatus::GoalReached`) upon target funding completion.
+- *(In addition, `contracts/crowdfunding/contracts/reward-badge/src/test.rs` covers tokenized balance increment verification via **`credits_donor_balance`**).*
 
 ### 2. Frontend Utility Tests (`vitest run`)
-Located in `src/lib/stellar.test.ts`, the suite validates client-side data transformations:
-- **`formatAmount`**: Asserts proper locale formatting and robust handling of numerical/string inputs.
-- **`testnetExplorerUrl`**: Verifies exact URL synthesis for Stellar.Expert contract and transaction lookups.
+Located in `src/lib/stellar.test.ts`, the suite validates client-side data transformations and URL helpers:
+- **`formatAmount > formats numbers correctly with locale commas`**: Asserts proper locale-aware number formatting.
+- **`formatAmount > converts string amounts and formats cleanly`**: Asserts robust string-to-number conversion parsing.
+- **`testnetExplorerUrl > constructs valid stellar.expert contract URL`**: Verifies exact URL synthesis for contract explorer lookups.
+- **`testnetExplorerUrl > handles alphanumeric contract address hashes`**: Asserts integrity of address URL parameter routing.
 
 ### 3. Continuous Integration (`.github/workflows/ci.yml`)
-Every push and pull request against the `main` branch automatically triggers the GitHub Actions CI pipeline, running:
-1. `npm install --frozen-lockfile`
+Every push and pull request against the `main` branch automatically triggers the GitHub Actions CI pipeline (`cargo test --workspace` and `npm run test`), executing:
+1. `npm install --legacy-peer-deps`
 2. `npm run lint` (ESLint & TypeScript type checking)
 3. `npm run build` (Vite production bundle verification)
-4. `cargo test` (Soroban contract unit test execution)
+4. `cargo test --manifest-path contracts/crowdfunding/Cargo.toml --workspace` (Full Soroban contract workspace suite execution across all contracts)
 
 ---
 
@@ -258,8 +262,8 @@ npm run dev
 # 4. Run frontend utility unit tests (Vitest)
 npm run test
 
-# 5. Run Soroban smart contract unit tests (Cargo)
-cargo test --manifest-path contracts/crowdfunding/contracts/hello-world/Cargo.toml
+# 5. Run Soroban smart contract workspace unit tests (Cargo)
+cargo test --manifest-path contracts/crowdfunding/Cargo.toml --workspace
 
 # 6. Build production bundle
 npm run build

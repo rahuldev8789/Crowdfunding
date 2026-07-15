@@ -34,4 +34,4 @@ jobs:
         targets: wasm32-unknown-unknown
 
     - name: Run Smart Contract Tests
-      run: cargo test --manifest-path contracts/crowdfunding/contracts/hello-world/Cargo.toml
+      run: cargo test --manifest-path contracts/crowdfunding/Cargo.toml --workspace
