@@ -55,11 +55,14 @@ a {
   backdrop-filter: blur(18px);
 }
 
-.hero-copy h1 {
-  margin: 8px 0 12px;
-  font-size: clamp(2.4rem, 4vw, 4.4rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
+.hero-copy h1,
+.hero-title {
+  margin: 8px 0 16px;
+  font-size: clamp(2.2rem, 3.8vw, 3.8rem);
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  color: #f8fbff;
 }
 
 .eyebrow {
@@ -93,9 +96,48 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  gap: 8px;
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.wallet-chip-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.wallet-chip-top img,
+.wallet-chip img,
+.wallet-chip svg {
+  width: 26px !important;
+  height: 26px !important;
+  max-width: 26px !important;
+  max-height: 26px !important;
+  object-fit: contain;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.wallet-badge {
+  font-size: 0.72rem !important;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.wallet-badge.available {
+  background: rgba(74, 222, 128, 0.2);
+  color: #86efac;
+}
+
+.wallet-badge.unavailable {
+  background: rgba(148, 163, 184, 0.2);
+  color: #94a3b8;
 }
 
 .wallet-chip span {
@@ -137,6 +179,131 @@ a {
 .stats-grid span {
   color: #93c5fd;
   font-size: 0.9rem;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0 8px;
+}
+
+.summary-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summary-item span {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.summary-item strong {
+  font-size: 1.6rem;
+  color: #f8fbff;
+  font-weight: 700;
+}
+
+.progress-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 22px 0;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 18px 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.progress-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.progress-label-row span {
+  color: #cbd5e1;
+}
+
+.progress-percent {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.reward-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.reward-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.reward-info {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: #fde68a;
+}
+
+.reward-info strong {
+  color: #fbbf24;
+  font-size: 0.96rem;
+}
+
+.reward-info p {
+  margin: 0;
+  line-height: 1.5;
+  color: #fef3c7;
+}
+
+.reward-link {
+  color: #fbbf24;
+  font-weight: 600;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.wallet-section {
+  margin-top: 24px;
+}
+
+.section-heading.compact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.wallet-count-badge {
+  background: rgba(34, 211, 238, 0.15);
+  color: #67e8f9;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .progress-bar {
